@@ -1,0 +1,19 @@
+<!-- <form [formGroup]="frmGrp"> -->
+  <input
+  nbInput
+  fullWidth fieldSize="tiny" type="text" style="font-size: 10px;"
+  [formControl]="CtrDt"
+  [nbDatepicker]="CtrDtc"
+  (ngModelChange)="onChange($event)"
+  >
+  <nb-datepicker #CtrDtc ></nb-datepicker>
+<!-- formControlName="CtrDt" -->
+<!-- </form> -->
+<!-- <input
+[id]="id"
+nbInput
+fullWidth fieldSize="tiny" type="text" style="font-size: 10px;"
+[value]="dtValue"
+(change)="onChange($event)"
+[nbDatepicker]="dtPick">
+<nb-datepicker #dtPick ></nb-datepicker> -->

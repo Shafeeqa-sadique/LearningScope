@@ -1,0 +1,169 @@
+<style>
+  /* nb-card {
+    margin-top: 4px;
+    margin-bottom: 3px;
+  }
+  nb-card-header {
+    padding-top: 4px;
+    padding-bottom: 3px;
+  }
+  .nb-theme-default li {
+    font-size: 11px;
+  }
+  .jqx-tree-item{
+    font-size: 11px;
+  } */
+
+</style>
+<div class="row">
+  <div class="col">
+    <nb-card>
+      <nb-card-header>Timesheet Admin Review</nb-card-header>
+      <nb-card-body class="col-md-12 col-sm-12 col-xs-12">
+        <form [formGroup]="frmGrp">
+          <div class="row">
+            <div class="form-group col-md-3 col-sm-12 col-xs-12">
+              <label for="tsName" class="label">Timesheet Period</label>
+              <select
+                #tsName
+                class="form-control"
+                formControlName="tsName"
+                (change)="onSelectTsName(tsName.value)"
+              >
+                <option value="{{ s.Id }}" *ngFor="let s of dtWk">
+                  {{ s.WkName }}
+                </option>
+              </select>
+              <control-messages
+                [control]="frmGrp.controls.tsName"
+              ></control-messages>
+            </div>
+            <div class="form-group col-md-3 col-sm-12 col-xs-12">
+              <label for="dtFrom" class="label">From</label>
+              <input
+                nbInput
+                type="text"
+                fullWidth
+                fieldSize="small"
+                [readonly]="true"
+                formControlName="dtFrom"
+              />
+            </div>
+            <div class="form-group col-md-3 col-sm-12 col-xs-12">
+              <label for="dtTo" class="label">To</label>
+              <input
+                nbInput
+                type="text"
+                fullWidth
+                fieldSize="small"
+                [readonly]="true"
+                formControlName="dtTo"
+              />
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <nb-card
+      [nbSpinner]="isSubmitProg"
+      nbSpinnerSize="large"
+      nbSpinnerStatus="danger"
+    >
+      <nb-card-header >
+        Timesheet Review
+      </nb-card-header>
+      <nb-card-body>
+        <!-- <div class="row">
+            <div class="col-4"><strong>Timesheet Review</strong> </div>
+
+             <div class="col-4">
+              <div class="form-horizontal">
+                <div class="form-group row" >
+                  <label class="label col-sm-4 form-control-label text-right">Filter By :</label>
+                  <div class="col-sm-8">
+                    <nb-select [selected]="this.fltrEmp"  (selectedChange)="onDllSelectEmp($event)" status="success" fullWidth="true" size="small" #ddlEmpStatus multiple
+                      placeholder="Employee Status" >
+                      <nb-option [value]="null">All</nb-option>
+                      <nb-option value="{{ s.DISP_VALUE }}" *ngFor="let s of dtPAFSts">
+                        {{ s.DISP_NAME }}
+                      </nb-option>
+                    </nb-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-2 form-group">
+              <nb-select [selected]="this.fltrStsId"  (selectedChange)="onDllSelectSts($event)" fullWidth="true" size="small" #ddlTSStatus status="primary" placeholder="Timesheet Status">
+                <nb-option [value]="null">All</nb-option>
+                <nb-option value="{{ s.LkStatusCodeId }}" *ngFor="let s of dtTSFilterSTs">
+                  {{ s.Title }}
+                </nb-option>
+              </nb-select>
+            </div>
+            <div class="col-2 form-group">
+              <nb-select [selected]="this.fltrStsId"  (selectedChange)="onDllSelectInEx($event)" fullWidth="true" size="small" #ddlTSStatus status="primary"
+                placeholder="EX / IN">
+                <nb-option [value]="null">All</nb-option>
+                <nb-option value="{{ s.DISP_VALUE }}" *ngFor="let s of dtEXIN">
+                  {{ s.DISP_NAME }}
+                </nb-option>
+              </nb-select>
+            </div>
+        </div> -->
+        <div class="row">
+          <div class="col">
+            <ngx-ts-uc-sts *ngIf="this._pgRolID && this.cmSlctWkID"
+            [inRolID]="this._pgRolID" [inWeekID]="this.cmSlctWkID"
+            [inDtWk]="this.dtWk"
+            [inRolCode]="this._pgRolCode"
+            ></ngx-ts-uc-sts>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col">
+            <form [formGroup]="frmGrpTS">
+              <div class="row">
+                <div class="col">
+                  <jqxSplitter #splitter [width]="getWidth()" [height]="600" [panels]="[{size : 240}]" >
+                      <div>
+                          <div style="border-bottom:1px solid gray; background-color: #efefef; height: 20px; padding-top: 5px;">
+                            <span >Total PAAF :
+                              <strong> {{this.treTotPAF}}
+                              </strong>
+                            </span>
+                          </div>
+                          <div>
+                            <jqxTree id="trPAF"  style="border: none;" #trPAF
+                            [width]="'100%'" [height]="580" [source]="treRecords" (onSelect)="onTreSelect($event)">
+                            </jqxTree>
+                          </div>
+                      </div>
+                      <div>
+                          <div class="row">
+                            <div class="col-md-12" *ngIf="this.cmSlctWkID && this.cmSlctUsrID && _pgRolID" >
+                              <ngx-ts-uc-tsview #vwTS
+                              [inWeekID]="this.cmSlctWkID" [inUserID]="this.cmSlctUsrID"  [inRolID]="this._pgRolID"
+                              (onReloadTree)="onSelectTsName($event)"
+                              ></ngx-ts-uc-tsview>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+
+                            </div>
+                          </div>
+                      </div>
+                  </jqxSplitter>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div> -->
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

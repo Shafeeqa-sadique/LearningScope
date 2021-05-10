@@ -1,0 +1,154 @@
+<nb-card
+[nbSpinner]="isSubmitProg"
+nbSpinnerSize="large"
+nbSpinnerStatus="danger"
+>
+  <nb-card-header>Upload Timesheet</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="frmGroup">
+      <div class="row  d-flex justify-content-center">
+        <div class="form-group col-md-4 col-sm-12 col-xs-12">
+          <label for="tsName" class="label">Timesheet Period</label>
+          <select
+            #tsName
+            class="form-control"
+            formControlName="tsName"
+            (change)="onSelectTsName(tsName.value)"
+          >
+            <option value="{{ s.Id }}" *ngFor="let s of dtWk">
+              {{ s.WkName }}
+            </option>
+          </select>
+          <control-messages
+            [control]="frmGroup.controls.tsName"
+          ></control-messages>
+        </div>
+        <div class="form-group col-md-4 col-sm-12 col-xs-12">
+          <label for="dtFrom" class="label">From</label>
+          <input
+            nbInput
+            type="text"
+            fullWidth
+            fieldSize="small"
+            [readonly]="true"
+            formControlName="dtFrom"
+          />
+        </div>
+        <div class="form-group col-md-4 col-sm-12 col-xs-12">
+          <label for="dtTo" class="label">To</label>
+          <input
+            nbInput
+            type="text"
+            fullWidth
+            fieldSize="small"
+            [readonly]="true"
+            formControlName="dtTo"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group mb-3  col-md-4 col-sm-12 col-xs-12">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="XlTemplate" >Choose Template </label>
+          </div>
+          <select class="custom-select" id="XlTemplate"  formControlName="XlTemplate" >
+            <option value = "ORC" >Oracle Timesheet</option>
+            <option value = "RM" >RM Timesheet</option>
+          </select>
+          <control-messages [control]="frmGroup.controls.XlTemplate"></control-messages>
+        </div>
+        <div class="input-group mb-3  col-md-4 col-sm-12 col-xs-12">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Selected File</span>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01"
+            accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            (change)="handleFileInputRMXL($event.target.files)">
+            <label class="custom-file-label" for="inputGroupFile01">{{this.flName}}</label>
+          </div>
+          <control-messages [control]="frmGroup.controls.XlFile"></control-messages>
+        </div>
+
+      </div>
+      <div class="row   d-flex justify-content-center">
+        <div class="col-md-3">
+
+          <!-- <div class="form-group">
+            <label for="XlTemplate" class="label">Choose Template : </label>
+            <select id="XlTemplate"  formControlName="XlTemplate" class="form-control">
+              <option value = "RM" selected>RM Timesheet</option>
+              <option value = "ORC">Oracle Timesheet</option>
+           </select>
+           <control-messages [control]="uploadFrm.controls.XlTemplate"></control-messages>
+          </div> -->
+          <!-- <div class="form-group">
+            <input type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            formControlName="XlFile"  (change)="handleFileInputRMXL($event.target.files)" size="tiny"  />
+            <control-messages [control]="frmGroup.controls.XlFile"></control-messages>
+          </div> -->
+          <button type="submit" (click)="onSubmitRMXl()" nbButton status="danger">Upload Timesheet</button>
+        </div>
+      </div>
+    </form>
+    <!-- <div class="row d-flex justify-content-center">
+      <div class="col-md-3">
+        <form [formGroup]="uploadFrm" enctype="multipart/form-data"  class="form-horizontal">
+          <div class="form-group">
+            <label for="cutOfDtStrt" class="label">Timesheet Start Date :</label>
+            <input formControlName="cutOfDtStrt"  nbInput
+            fullWidth fieldSize="small"
+            [nbDatepicker]="pickerStrt">
+            <nb-datepicker #pickerStrt ></nb-datepicker>
+            <control-messages [control]="uploadFrm.controls.cutOfDtStrt"></control-messages>
+          </div>
+          <div class="form-group">
+            <label for="cutOfDtEnd" class="label">Timesheet End Date :</label>
+            <input formControlName="cutOfDtEnd"  nbInput
+            fullWidth fieldSize="small" type="text"
+            [nbDatepicker]="pickerEnd">
+            <nb-datepicker #pickerEnd ></nb-datepicker>
+            <control-messages [control]="uploadFrm.controls.cutOfDtEnd"></control-messages>
+          </div>
+          <div class="form-group">
+            <label for="XlTemplate" class="label">Choose Template : </label>
+            <select id="XlTemplate"  formControlName="XlTemplate">
+              <option value = "RM" selected>RM Timesheet</option>
+              <option value = "ORC">Oracle Timesheet</option>
+           </select>
+           <control-messages [control]="uploadFrm.controls.XlTemplate"></control-messages>
+          </div>
+          <div class="form-group">
+            <input type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            formControlName="XlFile"  (change)="handleFileInputRMXL($event.target.files)" size="tiny"  />
+            <control-messages [control]="uploadFrm.controls.XlFile"></control-messages>
+          </div>
+          <button type="submit" (click)="onSubmitRMXl()" nbButton status="danger">Upload XL</button>
+        </form>
+      </div>
+    </div> -->
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>Upload Error details</nb-card-header>
+  <nb-card-body>
+    <jqxGrid
+          #grdPAF
+          [theme]="'office'"
+          [width]="grdGetWidth()" [source]="dataAdapter"
+          [columns]="grdColumns" [columnsresize]="true"
+          [columnsreorder]="true" [sortable]="true"
+          [pageable]="true" [showstatusbar]="true"
+          [showaggregates]="true" [filterable]="true"
+          [autoshowfiltericon]="true" [autoheight]="true"
+          [pagermode]="'simple'" [filterable]="true"
+          [sortable]="true"
+          [showtoolbar]="false"
+          [showeverpresentrow]="false" [everpresentrowposition]="'top'"
+          [selectionmode]="'multiplerowsextended'" [editable]="true" [editmode]="'selectedrow'"
+        >
+        </jqxGrid>
+  </nb-card-body>
+</nb-card>
+

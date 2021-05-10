@@ -1,0 +1,95 @@
+<style>
+  .modal-body {
+    /* max-height: 600px; */
+    overflow-y: auto;
+  }
+</style>
+<nb-card>
+  <nb-card-header>Add New CBS</nb-card-header>
+  <nb-card-body>
+    <div
+      class="modal-body"
+      [ngStyle]="{
+        'max-height': innerHeight + 'px',
+        'max-width': innerWidth + 'px',
+        innerWidth: '400px'
+      }"
+    >
+      <form [formGroup]="frmGroup" class="form-horizontal">
+        <div class="form-group row">
+          <label for="TASK_SL_NO_PARENT" class="label col-sm-4 form-control-label"
+            >Parent CBS Code</label
+          >
+          <div *ngIf="records" class="col-sm-8">
+            <jqxDropDownButton #TASK_SL_NO_PARENT [width]="250" [height]="25">
+              <jqxTree
+                #TASK_SL_NO_PARENT_TREE
+                [width]="250"
+                (onSelect)="myTreeOnSelect($event)"
+                [source]="records"
+              ></jqxTree>
+            </jqxDropDownButton>
+            <control-messages [control]="frmGroup.controls.TASK_SL_NO_PARENT"></control-messages>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="TASK_SL_NO" class="label col-sm-4 form-control-label">Sl No</label>
+          <div   class="col-sm-8">
+            <input nbInput type="text" fullWidth fieldSize="small"
+            formControlName="TASK_SL_NO"
+            >
+            <control-messages [control]="frmGroup.controls.TASK_SL_NO"></control-messages>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="TASK_CODE" class="label col-sm-4 form-control-label">CBS Code</label>
+          <div   class="col-sm-8">
+            <input nbInput type="text" fullWidth fieldSize="small"
+            formControlName="TASK_CODE"
+            >
+            <control-messages [control]="frmGroup.controls.TASK_CODE"></control-messages>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="TASK_DESC" class="label col-sm-4 form-control-label">CBS Desc</label>
+          <div   class="col-sm-8">
+            <input nbInput type="text" fullWidth fieldSize="small"
+            formControlName="TASK_DESC"
+            >
+            <control-messages [control]="frmGroup.controls.TASK_DESC"></control-messages>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="TASK_CATEGORY" class="label col-sm-4 form-control-label">Category</label>
+          <div   class="col-sm-8">
+            <nb-select formControlName="TASK_CATEGORY" selected="AFE" style="width: 250px;">
+              <nb-option value="AFE">AFE</nb-option>
+              <nb-option value="FACILITY">FACILITY</nb-option>
+              <nb-option value="PROJECT">PROJECT</nb-option>
+              <nb-option value="SUB_PROJECT">SUB_PROJECT</nb-option>
+              <nb-option value="TASK">TASK</nb-option>
+            </nb-select>
+            <control-messages [control]="frmGroup.controls.TASK_CATEGORY"></control-messages>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="SORT_ORDER" class="label col-sm-4 form-control-label">Sort Order</label>
+          <div   class="col-sm-8">
+            <input nbInput type="text" fullWidth fieldSize="small"
+            formControlName="SORT_ORDER"
+            >
+            <control-messages [control]="frmGroup.controls.SORT_ORDER"></control-messages>
+          </div>
+        </div>
+      </form>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="row align-items-center justify-content-center h-100">
+      <div class="col-md-12 text-center">
+        <button nbButton hero status="primary" style="margin-right: 10px;" (click)="addCBS()">Save & Add Another</button>
+        <button nbButton hero status="danger" (click)="dismiss()">Cancel</button>
+      </div>
+    </div>
+  </nb-card-footer>
+</nb-card>

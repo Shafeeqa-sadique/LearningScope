@@ -1,0 +1,525 @@
+<style>
+
+  .modal-body{
+      /* max-height: 600px; */
+      overflow-y: auto;
+
+  }
+  </style>
+
+  <nb-card>
+    <nb-card-header>Add New PAAF</nb-card-header>
+    <nb-card-body>
+      <!-- <div class="modal-body" [style.height.px]="innerHeight" (window:resize)="onResize($event)"> -->
+        <div  class="modal-body" [ngStyle]="{'max-height': innerHeight +'px', 'max-width':innerWidth +'px'}">
+        <form [formGroup]="frmGroup"  >
+           <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="PAAFNo" class="label">PAAF No</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="PAAFNo"
+                    >
+                    <control-messages [control]="frmGroup.controls.PAAFNo"  ></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="Rev" class="label">Rev No</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="Rev"
+                    >
+                    <control-messages [control]="frmGroup.controls.Rev"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="EmpID" class="label">Employee NO#</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="EmpID"
+                    >
+                    <control-messages [control]="frmGroup.controls.EmpID"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="PAFDate" class="label">PAAF Date</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="PAFDate"
+                    [nbDatepicker]="PAFDate1"
+                    >
+                  <nb-datepicker #PAFDate1 ></nb-datepicker>
+                  <control-messages [control]="frmGroup.controls.PAFDate"></control-messages>
+                </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="Name" class="label">Name</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="Name"
+                    >
+                    <control-messages [control]="frmGroup.controls.Name"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="Position" class="label">Position</label>
+                  <select class="form-control" formControlName="Position">
+                    <option value="{{s.DISP_VALUE}}" *ngFor="let s of dtPosition">{{s.DISP_NAME}}</option>
+                  </select>
+                  <control-messages [control]="frmGroup.controls.Position"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="ExpLevel" class="label">Experience Level</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="ExpLevel"
+                    >
+                    <control-messages [control]="frmGroup.controls.ExpLevel"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="TransportAllowance" class="label">Transport Allowance</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="TransportAllowance"
+                    >
+                    <control-messages [control]="frmGroup.controls.TransportAllowance"></control-messages>
+                </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="ContractNO" class="label">Contract NO</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="ContractNO"
+                    >
+                    <control-messages [control]="frmGroup.controls.ContractNO"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="CallOffNO" class="label">Call Off NO</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="CallOffNO"
+                    >
+                    <control-messages [control]="frmGroup.controls.CallOffNO"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group" >
+                <label for="CTRNO" class="label">CTR NO</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                  formControlName="CTRNO"
+                  >
+                  <control-messages [control]="frmGroup.controls.CTRNO"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="OrgChartIDNo" class="label">Organization Chart</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="OrgChartIDNo"
+                    >
+                    <control-messages [control]="frmGroup.controls.OrgChartIDNo"></control-messages>
+                </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="OrgChartPositionTitle" class="label">Org Chart Position Title</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="OrgChartPositionTitle"
+                    >
+                    <control-messages [control]="frmGroup.controls.OrgChartPositionTitle"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="OCDepart" class="label">OC Department</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="OCDepart"
+                    >
+                    <control-messages [control]="frmGroup.controls.OCDepart"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="OCSubDepartment" class="label">OC Sub Department</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="OCSubDepartment"
+                    >
+                    <control-messages [control]="frmGroup.controls.OCSubDepartment"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="TimesheetProject" class="label">Timesheet Project</label>
+                    <select class="form-control" formControlName="TimesheetProject">
+                      <option value="{{s.DISP_VALUE}}" *ngFor="let s of dtTsPrj">{{s.DISP_NAME}}</option>
+                    </select>
+                    <control-messages [control]="frmGroup.controls.TimesheetProject"></control-messages>
+                </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="ROOTimesheetProjectRef" class="label">ROO Timesheet Project Ref</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="ROOTimesheetProjectRef"
+                    >
+                    <control-messages [control]="frmGroup.controls.ROOTimesheetProjectRef"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="SNCTimesheetProject_Ref" class="label">SNC Timesheet Project Refer</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="SNCTimesheetProject_Ref"
+                    >
+                    <control-messages [control]="frmGroup.controls.SNCTimesheetProject_Ref"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="OvertimeReq" class="label">Overtime Req (Yes/No)</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="OvertimeReq"
+                    >
+                    <control-messages [control]="frmGroup.controls.OvertimeReq"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="OvertimeReqRefer" class="label">Overtime Req Refer</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="OvertimeReqRefer"
+                    >
+                    <control-messages [control]="frmGroup.controls.OvertimeReqRefer"></control-messages>
+                </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="EX_LN" class="label">EX / LN</label>
+                  <select class="form-control" formControlName="EX_LN" >
+                    <option value="EX">External</option>
+                    <option value="IN">Internal</option>
+                  </select>
+                    <control-messages [control]="frmGroup.controls.EX_LN"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="DirectIndirect" class="label">Direct/Indirect</label>
+                  <select class="form-control" formControlName="DirectIndirect" >
+                    <option value="Direct">Direct</option>
+                    <option value="Indirect">Indirect</option>
+                  </select>
+                  <control-messages [control]="frmGroup.controls.DirectIndirect"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="ProjectAssign" class="label">Direct/Indirect (AFE-wise)</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="ProjectAssign"
+                    >
+                    <control-messages [control]="frmGroup.controls.ProjectAssign"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="Nationality" class="label">Nationality</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="Nationality"
+                    >
+                    <control-messages [control]="frmGroup.controls.Nationality"></control-messages>
+                </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="RequestLetterNO" class="label">Request Letter NO</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                  formControlName="RequestLetterNO"
+                  >
+                    <control-messages [control]="frmGroup.controls.RequestLetterNO"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="AprrovalLetterNO" class="label">Aprroval Letter NO</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                  formControlName="AprrovalLetterNO"
+                  >
+                  <control-messages [control]="frmGroup.controls.AprrovalLetterNO"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group" >
+                <label for="StaffAgency" class="label">Staff Agency</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                  formControlName="StaffAgency"
+                  >
+                  <control-messages [control]="frmGroup.controls.StaffAgency"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="ContractPositionTitle" class="label">ContractPositionTitle</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="ContractPositionTitle"
+                    >
+                    <control-messages [control]="frmGroup.controls.ContractPositionTitle"></control-messages>
+                </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="Discipline" class="label">Discipline</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                  formControlName="Discipline"
+                  >
+                    <control-messages [control]="frmGroup.controls.Discipline"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="Category" class="label">Category</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                  formControlName="Category"
+                  >
+                  <control-messages [control]="frmGroup.controls.Category"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="KeyPersonnel" class="label">Key Personnel</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="KeyPersonnel"
+                    >
+                    <control-messages [control]="frmGroup.controls.KeyPersonnel"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="Project" class="label">Project</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                    formControlName="Project"
+                    >
+                    <control-messages [control]="frmGroup.controls.Project"></control-messages>
+                </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="ServicesLocation" class="label">ServicesLocation</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                  formControlName="ServicesLocation"
+                  >
+                    <control-messages [control]="frmGroup.controls.ServicesLocation"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="StartDtActual" class="label">Start Date Actual</label>
+                  <input nbInput type="text" fullWidth fieldSize="small"
+                  formControlName="StartDtActual"
+                  [nbDatepicker]="StartDtActual1"
+                  >
+                  <nb-datepicker #StartDtActual1></nb-datepicker>
+                  <control-messages [control]="frmGroup.controls.StartDtActual"></control-messages>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="EffectiveDt" class="label">Effective Date</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="EffectiveDt"
+                [nbDatepicker]="EffectiveDt1"
+                >
+                <nb-datepicker #EffectiveDt1></nb-datepicker>
+                <control-messages [control]="frmGroup.controls.EffectiveDt"></control-messages>
+            </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="PAAFEndDt" class="label">PAAF End Date</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="PAAFEndDt"
+                [nbDatepicker]="PAAFEndDt1"
+                >
+                <nb-datepicker #PAAFEndDt1></nb-datepicker>
+                <control-messages [control]="frmGroup.controls.PAAFEndDt"></control-messages>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="ContractRate" class="label">Contract Rate</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="ContractRate"
+                >
+                <control-messages [control]="frmGroup.controls.ContractRate"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group" >
+                <label for="OvertimePaid" class="label">Overtime Paid</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="OvertimePaid"
+                >
+                  <control-messages [control]="frmGroup.controls.OvertimePaid"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group" >
+                <label for="PAAFStatus" class="label">PAAF Status</label>
+                <select class="form-control" formControlName="PAAFStatus">
+                  <option value="{{s.DISP_VALUE}}" *ngFor="let s of dtPafSts">{{s.DISP_NAME}}</option>
+                </select>
+                  <control-messages [control]="frmGroup.controls.PAAFStatus"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group" >
+                <label for="EmployeeStatus" class="label">Employee Status</label>
+                <select class="form-control" formControlName="EmployeeStatus">
+                  <option value="{{s.DISP_VALUE}}" *ngFor="let s of dtEmpSts">{{s.DISP_NAME}}</option>
+                </select>
+                <control-messages [control]="frmGroup.controls.EmployeeStatus"></control-messages>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="SubmittedDate" class="label">Submitted Date</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="SubmittedDate"
+                [nbDatepicker]="SubmittedDate1"
+                >
+                <nb-datepicker #SubmittedDate1></nb-datepicker>
+                <control-messages [control]="frmGroup.controls.SubmittedDate"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="ApprovedDate" class="label">Approved Date</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="ApprovedDate"
+                [nbDatepicker]="ApprovedDate1"
+                >
+                <nb-datepicker #ApprovedDate1></nb-datepicker>
+                <control-messages [control]="frmGroup.controls.ApprovedDate"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="DePAAFDate" class="label">DePAAF Date</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="DePAAFDate"
+                [nbDatepicker]="DePAAFDate1"
+                >
+                <nb-datepicker #DePAAFDate1></nb-datepicker>
+                <control-messages [control]="frmGroup.controls.DePAAFDate"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="DemobilizedDate" class="label">DePAAF Date</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="DemobilizedDate"
+                [nbDatepicker]="DemobilizedDate1"
+                >
+                <nb-datepicker #DemobilizedDate1></nb-datepicker>
+                <control-messages [control]="frmGroup.controls.DemobilizedDate"></control-messages>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="InCntryRateMin" class="label">In Country Rate (Min)</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="InCntryRateMin">
+                <control-messages [control]="frmGroup.controls.InCntryRateMin"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="InCntryRate" class="label">In Country Rate</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="InCntryRateMin">
+                <control-messages [control]="frmGroup.controls.InCntryRate"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="OutCntryRateMin" class="label">Out Country Rate (Min)</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="OutCntryRateMin">
+                <control-messages [control]="frmGroup.controls.OutCntryRateMin"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="OutCntryRate" class="label">Out Country Rate</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="OutCntryRate">
+                <control-messages [control]="frmGroup.controls.OutCntryRate"></control-messages>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-center justify-content-center h-100">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="AssignDetail" class="label">Assignment Detail</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="AssignDetail">
+                <control-messages [control]="frmGroup.controls.AssignDetail"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="CVAttached" class="label">CV Attached</label>
+                <input nbInput type="text" fullWidth fieldSize="small"
+                formControlName="CVAttached">
+                <control-messages [control]="frmGroup.controls.CVAttached"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group" >
+                <label for="Remarks" class="label">Remarks</label>
+                <input nbInput type="text" fullWidth fieldSize="small" formControlName="Remarks">
+                <control-messages [control]="frmGroup.controls.Remarks"></control-messages>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12"></div>
+          </div>
+        </form>
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <div *ngIf="dtEmpSts">
+      <div class="row align-items-center justify-content-center h-100">
+        <div class="col-md-12 text-center">
+          <button nbButton hero status="primary" style="margin-right: 10px;" (click)="addPAAF()">Save & Add Another</button>
+          <button nbButton hero status="danger" (click)="dismiss()">Cancel</button>
+        </div>
+      </div>
+    </div>
+    </nb-card-footer>
+  </nb-card>

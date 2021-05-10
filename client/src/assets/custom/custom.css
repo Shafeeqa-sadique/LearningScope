@@ -1,0 +1,237 @@
+
+/******** BOOTSTRAP **********/
+
+/* .input-group-sm > .form-control, .input-group-sm > .input-group-prepend, .input-group-sm > .input-group-btn > .btn {
+  height: calc(0.8em + 2px + 0.5rem) !important;
+} */
+/******** BOOTSTRAP *********/
+
+/******** NEBULAR **********/
+.nbWindowClass {
+  width : 80% !important;
+  max-width: 90% !important;
+  background-color:red;
+}
+/******** NEBULAR **********/
+
+/******** JQWIDGET **********/
+.buttonRipple:hover
+{
+  background-color: #826e00 !important;
+  border-color: #6b5a02 !important;
+}
+.editButton {
+  font-weight: bold;
+  color:red;
+  height: 22px;
+  text-align: left;
+  font-size: 10px;
+  padding-bottom: 4px;
+}
+.jqx-grid-cell-selected {
+  background-color: #ccc !important;
+}
+.jqx-fill-state-normal {
+  padding-bottom: 3px;
+
+}
+.jqx-grid-cell-locked {
+  color: #777 !important;
+}
+.jqx-listitem-state-normal{
+  font-size: 11px !important;
+}
+.jqx-fill-state-normal{
+  font-size: 11px !important;
+}
+
+@media screen and (max-width:991px) {
+  ul.dropdown-menu{
+      right : 15px !important;
+      margin-top : 0px !important;
+  }
+}
+
+@media screen and (max-width:425px) {
+  .user-menu .user-image {
+      margin-right: 8px !important;
+  }
+  .content-header h1{
+    margin-top: 30px !important;
+    font-size: 19px !important;
+  }
+}
+
+/*********** JQWIDGETS  **********/
+/*********** JQWIDGETS GRID **********/
+ .jqx-widget-header-office
+{
+  background-color: #e4e4e4 !important;
+}
+.jqx-grid-column-header
+{
+  border-color: #aaa !important;
+  font-weight: 600;
+}
+.jqx-grid-cell-filter
+{
+  background-color: rgba(240, 229, 214, 0.80) !important;
+}
+.jqx-grid-cell-pinned
+{
+  background-color: #f4f4f5 !important;
+}
+.jqx-grid-cell {
+  background-color:#fdfaf5;
+  margin: 0px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.jqx-menu-wrapper {
+  z-index: 4047 !important;
+}
+.jqx-menu {
+  z-index: 4047 !important;
+}
+.cssGrdChildRow{
+  background-color: white
+}
+.grdTxtRed {
+  color: red !important;
+  font-weight: 600;
+}
+.grdTxtGreen {
+  color: green !important;
+  font-weight: 600;
+}
+
+/*********** JQWIDGETS GRID **********/
+
+
+/*********** JQWIDGETS TREE **********/
+.jqx-tree-item{
+  font-size: 12px;
+}
+.jqx-fill-state-pressed{
+  border-color: #accafa;
+  background: #accafa;
+}
+/*********** JQWIDGETS TREE **********/
+
+
+/*********** JQWIDGET **********/
+
+/************* ADX ADMIN **************/
+nb-card {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+nb-card-header {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+/************* ADX ADMIN **************/
+
+/************* AG GRID **************/
+.ag-header-cell-label {
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  color: #333;
+}
+.ag-header-group-cell-label{
+  justify-content: center;
+  color: #333;
+}
+
+.ag-cell
+{
+   border-right-color: #d9dddf !important;
+   border-right-width: 1px ;
+   border-right-style: solid ;
+   height: 20px;
+ }
+
+ .ag-theme-balham .ag-rich-select .ag-rich-select-list {
+  width: auto !important;
+}
+.ag-popup-editor{
+  min-width: 400px !important;
+}
+/************* AG GRID **************/
+
+/************* BUTTON **************/
+.cssBtnGreen {
+	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+	background-color:#44c767;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:12px;
+	padding:3px 14px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #2f6627;
+}
+.cssBtnGreen:hover {
+	background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+	background-color:#5cbf2a;
+  color:black;
+}
+.cssBtnGreen:active {
+	position:relative;
+	top:1px;
+}
+
+
+.cssBtnRed {
+	box-shadow:inset 0px 1px 0px 0px #f7c5c0;
+	background:linear-gradient(to bottom, #fc8d83 5%, #e4685d 100%);
+	background-color:#fc8d83;
+  border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+  font-size:12px;
+	padding:3px 14px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #b23e35;
+}
+.cssBtnRed:hover {
+	background:linear-gradient(to bottom, #e4685d 5%, #fc8d83 100%);
+	background-color:#e4685d;
+  color:black;
+}
+.cssBtnRed:active {
+	position:relative;
+	top:1px;
+}
+
+.csBtnBlue {
+	box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	background:linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+	background-color:#bddbfa;
+	border-radius:8px;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	cursor:pointer;
+  color:black;
+	font-family:Arial;
+  font-size:11px;
+	padding:3px 14px;
+	text-decoration:none;
+}
+.csBtnBlue:hover {
+	background:linear-gradient(to bottom, #80b5ea 5%, #bddbfa 100%);
+	background-color:#80b5ea;
+  color: #ff0000;;
+}
+.csBtnBlue:active {
+	position:relative;
+	top:1px;
+}
+
+
+/************* BUTTON **************/

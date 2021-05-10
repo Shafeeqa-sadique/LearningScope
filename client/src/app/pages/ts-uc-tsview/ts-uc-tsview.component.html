@@ -1,0 +1,194 @@
+<form [formGroup]="frmGrp"
+[nbSpinner]="isSubmitProg"
+nbSpinnerSize="large"
+nbSpinnerStatus="danger"
+
+>
+<div class="row rowPad">
+  <div class="col">
+    <div class="input-group input-group-sm">
+      <div class="input-group-prepend">
+        <span class="input-group-text"  >PAAF NO :</span>
+      </div>
+      <input formControlName="ctPAF" [readOnly]="true" style="height: auto;"  type="text" class="form-control" aria-label="PAAF NO :" aria-describedby="inputGroup-sizing-sm">
+    </div>
+  </div>
+  <div class="col">
+    <div class="input-group input-group-sm">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Name :</span>
+      </div>
+      <input formControlName="ctName" [readOnly]="true" style="height: auto;"  type="text" class="form-control" aria-label="Name :" aria-describedby="inputGroup-sizing-sm">
+    </div>
+  </div>
+  <div class="col">
+    <div class="input-group input-group-sm">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Job Title :</span>
+      </div>
+      <input formControlName="ctJobTitle" [readOnly]="true" style="height: auto;"  type="text" class="form-control" aria-label="Job Title :" aria-describedby="inputGroup-sizing-sm">
+    </div>
+  </div>
+  <div class="col">
+    <div class="input-group input-group-sm">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Submitted Date :</span>
+      </div>
+      <input formControlName="ctDt" [readOnly]="true" style="height: auto;"  type="text" class="form-control" aria-label="Submitted Date :" aria-describedby="inputGroup-sizing-sm">
+    </div>
+  </div>
+</div>
+<div class="row rowPad">
+
+  <div class="col">
+    <div class="input-group input-group-sm">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Latest Remarks :</span>
+      </div>
+      <input formControlName="ctRmks" fullWidth [readOnly]="true" style="height: auto;"  type="text" class="form-control" aria-label="Remarks :" aria-describedby="inputGroup-sizing-sm">
+    </div>
+  </div>
+  <div class="col">
+    <div class="input-group input-group-sm" >
+      <div class="input-group-prepend">
+        <span class="input-group-text">Attachment :</span>
+      </div>
+      <a *ngIf="cmAtchLink" class="form-control"  [href]="cmAtchLink" target="_blank" aria-describedby="inputGroup-sizing-sm">{{this.cmAtchName}}</a>
+    </div>
+  </div>
+  <div class="col"
+  [ngClass]="{'disabledbutton': this.isSubmitOk === false}"
+   >
+    <div class="input-group input-group-sm">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Attach Overtime Approval</span>
+      </div>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile01"
+        formControlName="file"
+        (change)="handleFileInputRMXL($event.target.files)">
+        <label class="custom-file-label" for="inputGroupFile01">{{this.flName}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="col"
+  [ngClass]="{'disabledbutton': this.isSubmitOk === false}"
+   >
+    <button (click)="this.onUpload()" fullWidth type="button" class="btn btn-primary">Upload Approval Email</button>
+  </div>
+</div>
+<!-- [ngClass]="{'disabledbutton': this.isSubmitOk === false}" -->
+  <!-- <div class="row">
+    <div class="col-12">
+      <div class="row" style="padding-top: 5px;">
+        <div class="col-md-3">
+          <div class="form-horizontal">
+            <div class="form-group row" >
+              <label class="label col-md-3 col-sm-3 col-xs-12 form-control-label text-right">PAAF NO :</label>
+              <input formControlName="ctPAF"  nbInput fullWidth fieldSize="small"  class="label col-md-6 col-sm-6 col-xs-12 text-left" [readOnly]="true" >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-horizontal">
+            <div class="form-group row" >
+              <label class="label col-md-3 col-sm-3 col-xs-12 form-control-label text-right">Name :</label>
+              <input formControlName="ctName" nbInput fullWidth fieldSize="small"  class="label col-md-6 col-sm-6 col-xs-12 text-left" [readOnly]="true" >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-horizontal">
+            <div class="form-group row" >
+              <label class="label col-md-3 col-sm-3 col-xs-12 form-control-label text-right">Job Title :</label>
+              <input formControlName="ctJobTitle" nbInput fullWidth fieldSize="small"  class="label col-md-6 col-sm-6 col-xs-12 text-left" [readOnly]="true">
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="row">
+          <div class="col-md-3">
+              <div class="form-horizontal">
+                <div class="form-group row" >
+                  <label class="label col-md-3 col-sm-3 col-xs-12 form-control-label text-right">Submitted Date :</label>
+                  <input formControlName="ctDt" nbInput fullWidth fieldSize="small"  class="label col-md-6 col-sm-6 col-xs-12 text-left" [readOnly]="true">
+                </div>
+              </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-horizontal">
+              <div class="form-group row" >
+                <label class="label col-md-3 col-sm-3 col-xs-12 form-control-label text-right">User Remarks :</label>
+                <input formControlName="ctRmks" nbInput fullWidth fieldSize="small"  class="label col-md-6 col-sm-6 col-xs-12 text-left" [readOnly]="true">
+              </div>
+            </div>
+        </div>
+          <div class="col-md-4">
+            <div class="form-horizontal" *ngIf="cmAtchLink">
+              <div class="form-group row" >
+                <label class="label col-md-3 col-sm-3 col-xs-12 form-control-label text-right">Attachment :</label>
+                <a  class="col-md-6 col-sm-6  col-xs-12"  [href]="cmAtchLink" target="_blank">{{this.cmAtchName}}</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+  </div> -->
+
+<div class="row"  [ngClass]="{'disabledbutton': this.isSubmitOk === false}">
+  <div class="col" *ngIf="ddlSrcAFEType.length > 0 && ddlSrcAFE.length > 0">
+    <ag-grid-angular *ngIf="grdCol"
+    #grdTS
+    style="width: 100%; height: 250px"
+    class="ag-theme-balham"
+    groupHeaderHeight="30"
+    headerHeight="28"
+    [columnDefs]="grdCol"
+    [defaultColDef]="grdDefltColDef"
+    [pagination]="false"
+    [rowData]="grdRowData"
+    (gridReady)="onGrdReady($event)"
+    [frameworkComponents]="grdFramewrkComp"
+    getRowHeight="40"
+    singleClickEdit="true"
+    [stopEditingWhenGridLosesFocus]="true"
+  ></ag-grid-angular>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div class="form-group" style="margin-top: 5px">
+      <textarea rows="2"
+        nbInput
+        fullWidth
+        fieldSize="medium"
+        formControlName="TsSubmitRmks"
+        placeholder="Timesheet Remarks"
+        maxlength="128"
+      ></textarea>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div
+    class="col-md-12 col-sm-12 col-xs-12 text-center"
+    *ngIf="this.dtNxtActionBtn.length > 0 && this._smryID !== 0"
+  >
+    <button
+      nbButton
+      class="btn btn-outline-primary mr-2"
+      style="margin-top: 5px"
+      type="submit"
+      [status]="itm.NxtStatusColor"
+      *ngFor="let itm of this.dtNxtActionBtn; let i = index"
+      (click)="onActionSubmit(itm.LkNxtStatusCodeId)"
+      [id]="itm.ID"
+      #disable
+    >
+      {{ itm.CurrStatusDesc }}
+    </button>
+
+  </div>
+</div>
+</form>

@@ -1,0 +1,72 @@
+<form [formGroup]="frmGrp">
+  <!-- <div class="row" *ngIf="this.grdData">
+    <div class="col">
+      <div class="row" *ngIf="this.dtBtnActionAll.length == 0 && this.grdData.length > 0">
+        <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+          <nb-alert outline="danger">The submitted timesheet is still under review with other teams, once reviewed you will get notification to Approve / Reject</nb-alert>
+        </div>
+      </div>
+      <div class="row" *ngIf="this.dtBtnActionAll.length == 0 && this.grdData.length == 0">
+        <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+          <nb-alert outline="danger">Timesheets yet to be submitted for approval</nb-alert>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="row"
+  [nbSpinner]="isProg"
+  nbSpinnerSize="large"
+  nbSpinnerStatus="danger"
+  >
+    <div class="col" *ngIf="grdDA">
+        <jqxGrid #grdTS
+        [width]="'100%'" [source]="grdDA"
+        [height]="450"
+        [columns]="grdCol"
+        [columngroups]="grdColGrp"
+        [pageable]="true" [pagesize]="10" [showstatusbar]="false"
+        [showaggregates]="false"
+        [filterable]="true" [autoshowfiltericon]="true"
+        [autoheight]="true"
+        [pagermode]="'simple'"
+        [autoheight]="true"
+        [editable]="false"
+        [theme]="'office'"
+        [sortable]="true"
+        [selectionmode]="'multiplerowsextended'" [columnsresize]="true"
+        [columnsreorder]='true'
+        [columnsheight]='25'
+        [rowsheight]='27'
+        >
+        </jqxGrid>
+  </div>
+  </div>
+  <div class="row" *ngIf="this.dtBtnActionAll.length >0">
+    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+      <label for="tsAllRmks" class="label">Remarks</label>
+      <input
+        nbInput
+        fullWidth
+        fieldSize="large"
+        [readonly]="false"
+        formControlName="tsAllRmks"
+        placeholder="Remarks"
+      />
+    </div>
+    <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+          <button
+          nbButton
+          class="btn btn-outline-primary mr-2"
+          style="margin-top: 5px"
+          type="submit"
+          [status]="itm.NxtStatusColor"
+          *ngFor="let itm of this.dtBtnActionAll; let i = index"
+          (click)="onSubmitTSDirector(itm.LkNxtStatusCodeId)"
+          [id]="itm.ID"
+          #btnSubmitDirector
+          >
+          {{ itm.CurrStatusDesc }}
+          </button>
+    </div>
+  </div>
+</form>

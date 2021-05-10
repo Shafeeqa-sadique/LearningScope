@@ -1,0 +1,32 @@
+.disabledbutton {
+  pointer-events: none;
+  opacity: 0.4;
+}
+.rowPad {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.input-group-sm > .input-group-prepend > .input-group-text{
+  font-size: 0.67rem !important;
+  font-weight: 600;
+}
+.input-group-sm > .form-control{
+  font-size: 0.68rem !important;
+}
+
+.modal-lg {
+  max-width: 1490px !important;
+}
+.custom-file-input{
+  font-size: 0.5rem !important;
+}
+.nb-theme-default nb-card{
+  font-size: 0.67rem !important;
+  font-weight: 600;
+}
+.btn{
+  font-size: 0.7rem;
+  font-weight: 600;
+}

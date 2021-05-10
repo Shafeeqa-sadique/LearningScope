@@ -1,0 +1,256 @@
+<style>
+  nb-card {
+    margin-top: 4px;
+    margin-bottom: 3px;
+  }
+  nb-card-header {
+    padding-top: 4px;
+    padding-bottom: 3px;
+  }
+  nb-card-body {
+    padding-top: 4px;
+    padding-bottom: 3px;
+  }
+</style>
+<form [formGroup]="frmGrp">
+  <!-- <div class="row">
+    <div class="col">
+      <nb-card
+      >
+        <nb-card-header >FOR CONTRACTOR :</nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col">
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Intial By:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctSncLdIName"  type="text" class="form-control" aria-label="Intial By:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Status:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctSncLdSts"  type="text" class="form-control" aria-label="Approve / Reject:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Date:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctSncLdDt"  type="text" class="form-control" aria-label="Date:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Authorized By:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctCrMgrAName"  type="text" class="form-control" aria-label="Intial By:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Status:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctCrMgrAAp"  type="text" class="form-control" aria-label="Approve / Reject:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Date:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctCrMgrADt"  type="text" class="form-control" aria-label="Date:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+    <div class="col">
+      <nb-card
+      >
+        <nb-card-header >FOR COMPANY :</nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col">
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Intial By:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctCoLdIName"  type="text" class="form-control" aria-label="Intial By:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Status:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctCoLdIAp"  type="text" class="form-control" aria-label="Approve / Reject:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Date:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctCoLdIDt"  type="text" class="form-control" aria-label="Date:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Authorized By:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctCoMgrAName"  type="text" class="form-control" aria-label="Intial By:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Status:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctCoMgrAAp"  type="text" class="form-control" aria-label="Approve / Reject:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+              <div class="row rowPad">
+                <div class="col">
+                  <div class="input-group input-group-sm" >
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" >Date:</span>
+                    </div>
+                    <input [readOnly]="true" style="height: auto;" formControlName="ctCoMgrADt"  type="text" class="form-control" aria-label="Date:" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="col">
+      <nb-card
+      [nbSpinner]="isProg"
+      nbSpinnerSize="large"
+      nbSpinnerStatus="danger"
+      >
+        <nb-card-header>
+          Review Timesheet
+        </nb-card-header>
+        <nb-card-body>
+          <!-- <div class="row" *ngIf="this.grdData">
+            <div class="col">
+              <div class="row" *ngIf="this.dtBtnAction.length == 0 && this.grdData.length > 0">
+                <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+                  <nb-alert outline="danger">The submitted timesheet is under review with other teams, once reviewed you will get notification to Approve / Reject</nb-alert>
+                </div>
+              </div>
+              <div class="row" *ngIf="this.dtBtnAction.length == 0 && this.grdData.length == 0">
+                <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+                  <nb-alert outline="danger">Timesheets yet to be submitted for approval</nb-alert>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col">
+              <jqxTreeGrid
+                        [width]="'100%'"
+                        [source]="grdDA"
+                        [pageable]="true"
+                        [pageSize]="10"
+                        [editable]="true"
+                        [sortable]="true"
+                        [filterable]="false"
+                        [altRows]="false"
+                        [columnsHeight]="25"
+                        [pagerButtonsCount]="8"
+                        [toolbarHeight]="25"
+                        [columns]="grdCol"
+                        [columnGroups]="grdColGrp"
+                        [columnsResize]="true"
+                        [columnsReorder]="true"
+                        [selectionMode]="'simple'"
+                        [autoRowHeight]="false"
+                        [editSettings]="grdEditSetting"
+                        [height]="400"
+                        [theme]="'office'"
+                        [enableHover]="true"
+                        #grdTS>
+                </jqxTreeGrid>
+            </div>
+          </div>
+          <div class="row" *ngIf="this.dtBtnAction.length >0">
+            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+              <label for="tsAppRmks" class="label">Approval / Reject Remarks</label>
+              <input
+                nbInput
+                fullWidth
+                fieldSize="large"
+                [readonly]="false"
+                formControlName="tsAppRmks"
+                placeholder="Approval Remarks"
+                maxlength="128"
+              />
+            </div>
+          </div>
+          <div class="row" *ngIf="this.dtBtnAction.length >0">
+
+            <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+              <button
+              nbButton
+              class="btn btn-outline-primary mr-2"
+              style="margin-top: 5px"
+              type="submit"
+              [status]="itm.NxtStatusColor"
+              *ngFor="let itm of this.dtBtnAction; let i = index"
+              (click)="onSubmitTSLead(itm.LkNxtStatusCodeId)"
+              [id]="itm.ID"
+              #disable
+            >
+              {{ itm.CurrStatusDesc }}
+            </button>
+
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</form>

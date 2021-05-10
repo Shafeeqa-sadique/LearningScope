@@ -1,0 +1,127 @@
+<style >
+  nb-card
+  {
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+  nb-card-header {
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+</style>
+<!-- <div class="row">
+  <div class="col">
+    <button
+    class="btn btn-outline-primary mr-2"
+    type="submit"
+    (click)="expXL()" nbButton hero size="small" ><i style="color: #1D6F42;" class="fas fa-file-excel fa-2x"></i> Export Xl</button>
+  </div>
+</div> -->
+<div class="row">
+  <div class="col">
+    <!-- <iframe class="w-100" style="width: 100%;  height: 500px" src="http://localhost:4200/pages/dashboard" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+    <!-- <iframe #iframe style="width: 100%;  height: 80%" (load)="onLoad()" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+  </div>
+</div>
+
+
+<div class="row" *ngIf="false">
+  <div class="col-sm-4 col-xs-12 pull-right">
+  </div>
+  <div class="col-sm-4 col-xs-12">
+      <nb-select #ddlTsName
+      [selected]="ddlTsSlctItem"
+      (selectedChange)="onSelectTsName($event)" status="info" fullWidth="true"
+      size="small"
+      >
+        <nb-option [value]="c.Id"  *ngFor="let c of dtWk"
+        style="font-weight: 200;margin-left: 5px;border-bottom: 1px solid #efefef;">
+          {{ c.WkName }}
+        </nb-option>
+      </nb-select>
+  </div>
+</div>
+
+<div class="row" *ngIf="rolIsUser && false" >
+  <div class="col-sm-6 col-xs-12">
+    <nb-card>
+      <nb-card-header>Booked Hours By AFE Code</nb-card-header>
+      <nb-card-body>
+        <canvas id="chrtUsrAFE" class="chart-wrapper"></canvas>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-sm-6 col-xs-12">
+    <nb-card>
+      <nb-card-header>Sample Report - Booked Hours By Category</nb-card-header>
+      <nb-card-body>
+        <canvas id="chrtUsrAFEType" class="chart-wrapper"></canvas>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row" *ngIf="true">
+  <div class="col-sm-6 col-xs-12">
+    <nb-card>
+      <nb-card-header>Sample Report - Weekly Hours ( Timesheet Project Wise )</nb-card-header>
+      <nb-card-body>
+        <canvas id="chrtTmPrj" class="chart-wrapper"></canvas>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-sm-6 col-xs-12" *ngIf="false">
+    <nb-card>
+      <nb-card-header>Sample Report - Weekly Hours ( Call Off NO )</nb-card-header>
+      <nb-card-body>
+        <canvas id="chrtCTRNo" class="chart-wrapper"></canvas>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <button
+  class="btn btn-outline-primary mr-2" style="margin-top: 5px;" type="submit"
+  nbButton status="danger"
+    *ngFor="let item of items; let i = index"
+    [ngClass]="(lastClickedIndex == i) ? 'activeBtn': ''"
+    (click)="changeActive(i)"
+    #disable>
+    {{item.name}}
+  </button>
+</div> -->
+
+<!-- /* Then style the iframe to fit in the container div with full height and width */ -->
+<!-- <style>
+  .container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 75%;
+  }
+
+  .responsive-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+<nb-card>
+
+  <nb-card-body>
+     <div class="container">
+      <iframe
+        class="responsive-iframe"
+        allowfullscreen
+        src="https://app.powerbi.com/reportEmbed?reportId=54c158e5-02b3-4991-8b33-29baa3dc70c9&autoAuth=true&ctid=464aad2a-6b79-4c0a-bed4-5f90e0b6a607&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLW5vcnRoLWNlbnRyYWwtcmVkaXJlY3QuYW5hbHlzaXMud2luZG93cy5uZXQvIn0%3D"
+      ></iframe>
+    </div>
+    <div>
+
+    </div>
+  </nb-card-body>
+</nb-card> -->

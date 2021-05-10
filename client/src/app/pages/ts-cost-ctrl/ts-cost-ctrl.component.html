@@ -1,0 +1,234 @@
+<div class="row">
+  <div class="col">
+    <form [formGroup]="frmGrp1">
+      <div class="row">
+        <div class="col">
+          <nb-card>
+            <nb-card-header>Cost Control Review
+              <div class="row">
+                <div class="col">
+                </div>
+              </div>
+            </nb-card-header>
+            <nb-card-body class="col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                  <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                    <label for="tsName" class="label">Timesheet Period</label>
+                    <select
+                      #tsName
+                      class="form-control"
+                      formControlName="tsName"
+                      (change)="onSelectTsName(tsName.value)"
+                    >
+                      <option value="{{ s.Id }}" *ngFor="let s of dtWk">
+                        {{ s.WkName }}
+                      </option>
+                    </select>
+
+                  </div>
+                  <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                    <label for="dtFrom" class="label">From</label>
+                    <input
+                      nbInput
+                      type="text"
+                      fullWidth
+                      fieldSize="small"
+                      [readonly]="true"
+                      formControlName="dtFrom"
+                    />
+                  </div>
+                  <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                    <label for="dtTo" class="label">To</label>
+                    <input
+                      nbInput
+                      type="text"
+                      fullWidth
+                      fieldSize="small"
+                      [readonly]="true"
+                      formControlName="dtTo"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                      <!-- <nb-select #tsDepart formControlName="tsDepart" [selected]="null" [hidden]="true"
+                      (selectedChange)="onSelectDept($event)" status="info" fullWidth="true"
+                      size="small" placeholder="Call Off No - Timesheet Project"
+                      >
+                      <nb-select-label>
+                        {{this.cmSlctDeptTxt}}
+                      </nb-select-label>
+                        <nb-option value="null">Select Options</nb-option>
+                        <nb-option-group title="{{s.CallOFF}}" *ngFor="let s of dtDllDpt"
+                        style="font-weight: 800; font-size:15px; color:#444;background-color: #efefef;">
+                          <nb-option value="{{ c.Id }}" *ngFor="let c of s.TSPrjs" style="font-weight: 200;margin-left: 5px;border-bottom: 1px solid #efefef;">
+                            {{ c.TSPrj }}
+                          </nb-option>
+                        </nb-option-group>
+                      </nb-select> -->
+                  </div>
+                </div>
+                <div class="row" *ngIf="this.dtBtnActionAll.length >0">
+                  <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label for="tsAllRmks" class="label">Remarks</label>
+                    <input
+                      nbInput
+                      fullWidth
+                      fieldSize="large"
+                      [readonly]="false"
+                      formControlName="tsAllRmks"
+                      placeholder="Remarks"
+                    />
+                  </div>
+                  <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+                        <button
+                        nbButton
+                        class="btn btn-outline-primary mr-2"
+                        style="margin-top: 5px"
+                        type="submit"
+                        [status]="itm.NxtStatusColor"
+                        *ngFor="let itm of this.dtBtnActionAll; let i = index"
+                        (click)="onSubmitTSDirector(itm.LkNxtStatusCodeId)"
+                        [id]="itm.ID"
+                        #btnSubmitDirector
+                        >
+                        {{ itm.CurrStatusDesc }}
+                        </button>
+                  </div>
+                </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <!-- *ngIf="grdDA" -->
+  <div class="col" *ngIf="grdData" >
+    <form [formGroup]="frmGrpDtl">
+      <nb-card
+      [nbSpinner]="isProg"
+      nbSpinnerSize="large"
+      nbSpinnerStatus="danger"
+      >
+        <nb-card-header>Timesheet Review & Submit</nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col form-group">
+                <div class="row">
+                  <div class="col-md-3 col-xs-12">
+                    <nb-select  (selectedChange)="onDllSelectAprType($event)"
+                    status="success" [fullWidth]="true"   size="tiny" #ddlAprType
+                    formControlName="ddlAprType"
+                    placeholder="Select Contractor">
+                    <nb-option value="{{this._rolSNCLead}}">SNC Lead</nb-option>
+                    <nb-option value="{{this._rolClntLead}}">Client Lead</nb-option>
+                    </nb-select>
+                  </div>
+                  <div class="col-md-3 col-xs-12">
+                    <nb-select  (selectedChange)="onDllSelectAprName($event)"
+                    status="success" [fullWidth]="true"   size="tiny" #ddlAprUsrName
+                    formControlName="ddlAprUsrName"
+                    placeholder="Select Lead" >
+                    <nb-option [value]="null">All</nb-option>
+                    <nb-option value="{{s.AprEmailID}}" *ngFor="let s of this.ddlFltApr">{{s.AprName}}</nb-option>
+                    </nb-select>
+                  </div>
+                  <div class="col-md-3 col-xs-12">
+                    <nb-select  (selectedChange)="onDllSelectColHide($event)"
+                    status="success" [fullWidth]="true" size="tiny" #ddlHideCol
+                    formControlName="ddlHideCol"
+                    multiple
+                    placeholder="Show / Hide Columns" >
+                    <nb-option value="PAAFJobTitle">PAAF Job Title</nb-option>
+                    <nb-option value="OrgChartPositionTitle">Chart Position Title</nb-option>
+                    <nb-option value="OrgChartIDNo">Org Chart Position Title</nb-option>
+                    <nb-option value="ServicesLocation">Work Location</nb-option>
+                    </nb-select>
+                  </div>
+                  <div class="col-md-3 col-xs-12">
+                    <button class="btn" (click)="grdExportXL()"><i class="fas fa-file-excel"></i>Export</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+
+          </div>
+          <div class="row">
+              <div class="col">
+                <jqxTreeGrid
+                [width]="'100%'"
+                [source]="grdDA"
+                [pageable]="true" [pageSizeMode]="'root'"
+                [pageSize]="10"
+                [editable]="true"
+                [sortable]="true"
+                [filterable]="false"
+                [altRows]="false"
+                [columnsHeight]="25"
+                [pagerButtonsCount]="8"
+                [toolbarHeight]="25"
+                [columns]="grdCol"
+                [columnGroups]="grdColGrp"
+                [columnsResize]="true"
+                [columnsReorder]="true"
+                [autoRowHeight]="false"
+                [editSettings]="grdEditSettings"
+                [height]="400"
+                [theme]="'office'"
+                [enableHover]="false"
+                [rendered]="grdRendered"
+
+                (onRowClick)="grdRowClick($event)"
+                (onBindingComplete)="grdBindingComplete($event)"
+                (onCellBeginEdit)="grdOnCellBeginEdit($event)"
+                (onCellEndEdit)="grdOnCellEndEdit($event)"
+                #grdTS>
+                </jqxTreeGrid>
+                <!-- [virtualModeCreateRecords]="virtualModeCreateRecords"
+                [virtualModeRecordCreating]="virtualModeRecordCreating" -->
+                <!--  -->
+              </div>
+          </div>
+          <div class="row" *ngIf="this.dtBtnActionLead.length >0">
+            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+              <label for="tsAppRmks" class="label">Approval / Reject Remarks</label>
+              <input
+                nbInput
+                fullWidth
+                fieldSize="large"
+                [readonly]="false"
+                formControlName="tsAppRmks"
+                placeholder="Approval Remarks"
+              />
+            </div>
+          </div>
+          <div class="row" *ngIf="this.dtBtnActionLead.length >0">
+            <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="chkE"   formControlName="ctEmailEnable">
+                <label class="form-check-label" for="chkE">Send Email</label>
+              </div>
+              <button
+              nbButton
+              class="btn btn-outline-primary mr-2"
+              style="margin-top: 5px"
+              type="submit"
+              [status]="itm.NxtStatusColor"
+              *ngFor="let itm of this.dtBtnActionLead; let i = index"
+              (click)="onSubmitTSLead(itm.LkNxtStatusCodeId)"
+              [id]="itm.ID"
+              #disable
+              >
+              {{ itm.CurrStatusDesc }}
+              </button>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </form>
+
+  </div>
+</div>

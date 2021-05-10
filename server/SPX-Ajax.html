@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <script src="https://spl.snclavalin.com/sites/ogprjuaepaf/SiteAssets/SitePages/Js/jquery-3.4.1.min.js"></script>
+   </head>
+   <body>
+      <button onclick="GetCode()">GetCode</button>
+      <button onclick="Post()">Post</button>
+      
+      <ol id="jqlst"></ol>
+   </body>
+   <script>
+      var siteurl ="https://spl.snclavalin.com/sites/omprjbpgcmc";
+      var token =""
+      function GetCode(){
+         $.ajax({
+            url: siteurl + "/_api/contextinfo",
+            method: "POST",
+            headers: { "Accept": "application/json; odata=verbose"},
+            success: function (data) {
+               console.log(data.d.GetContextWebInformation.FormDigestValue);
+               token = data.d.GetContextWebInformation.FormDigestValue;
+               $('#__REQUESTDIGEST').val(data.d.GetContextWebInformation.FormDigestValue)
+            },
+            error: function (data, errorCode, errorMessage) {
+               alert(errorMessage)
+            }
+         });
+      }
+      function Post(){
+         console.log($("#__REQUESTDIGEST").val());
+         console.log(token)
+         $.ajax({
+                url : siteurl + "/_api/web/lists/getbytitle('LS_M_PAF_REGISTER')/items(140)",
+                method: "POST",
+               headers: { 
+                  "Accept": "application/json; odata=verbose", 
+                  "Content-Type": "application/json; odata=verbose", 
+                  "X-RequestDigest": token,
+                  "X-HTTP-Method" : "MERGE",
+                  "IF-MATCH":"*"
+               },
+               data: JSON.stringify({  
+            '__metadata': {  
+                'type': 'SP.Data.LS_x005f_M_x005f_PAF_x005f_REGISTERListItem' // it defines the ListEnitityTypeName  
+                     },  
+                     //Pass the parameters
+                     'Title': 'eName' 
+               }),
+               success: function (data) {
+                     console.log(data);       
+               },
+               error: function (data) {
+                  alert("Error: "+ data);
+               }
+            });
+      }
+      $(document).ready(function() { 
+       
+       
+       
+       $.ajax({
+               url : siteurl + "/_api/web/lists/getbytitle('LS_M_PAF_REGISTER')/items",
+          method: "GET",
+                             headers: { "Accept": "application/json; odata=verbose" },
+                             success: function (data) {
+                                  if (data.d.results.length > 0 ) {
+                                       //This section can be used to iterate through data and show it on screen
+                                             console.log(data.d.results);
+                                            data = data.d.results; 
+                                            $.each(data, function(index, value) {   
+                                                $("ol").append("<li>" + value.Title +"</li>");
+                                           });  
+                                  }       
+                            },
+                            error: function (data) {
+                                alert("Error: "+ data);
+                           }
+       });
+      });
+   </script>
+</html>

@@ -1,0 +1,88 @@
+<style>
+  nb-card {
+    margin-top: 4px;
+    margin-bottom: 3px;
+  }
+  nb-card-header {
+    padding-top: 4px;
+    padding-bottom: 3px;
+  }
+  nb-card-body {
+    padding-top: 4px;
+    padding-bottom: 3px;
+  }
+</style>
+<div class="row">
+  <div class="col">
+    <form [formGroup]="frmGroup"  >
+      <nb-card>
+        <nb-card-header style="padding-top: 3px; padding-bottom: 3px;">ROO Lead Approval</nb-card-header>
+        <nb-card-body>
+            <div class="row">
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="form-group" >
+                    <label for="tsName" class="label">SNC Discipline Lead</label>
+                    <select
+                    #tsName
+                    class="form-control"
+                    formControlName="tsName"
+                    (change)="onSelectTsName(tsName.value)"
+                  >
+                    <option value="{{ s.Id }}" *ngFor="let s of dtWk">
+                      {{ s.WkName }}
+                    </option>
+                  </select>
+                      <control-messages [control]="frmGroup.controls.tsName"  ></control-messages>
+                  </div>
+              </div>
+              <div class="form-group col-md-3 col-sm-12 col-xs-12">
+                <label  class="label">From</label>
+                <input
+                  nbInput
+                  type="text"
+                  fullWidth
+                  fieldSize="small"
+                  [readonly]="true"
+                  formControlName="dtFrom"
+                />
+              </div>
+              <div class="form-group col-md-3 col-sm-12 col-xs-12">
+                <label class="label">To</label>
+                <input
+                  nbInput
+                  type="text"
+                  fullWidth
+                  fieldSize="small"
+                  [readonly]="true"
+                  formControlName="dtTo"
+                />
+              </div>
+              <!-- <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="dtFrom" class="label">Choose Timesheet Project</label>
+                  <jqxDropDownButton #treDll  [width]="250" [height]="25">
+                    <jqxTree id="treID"  style="border: none;" #treID
+                    [width]="250" [height]="400" [source]="treRecords" (onSelect)="onTreSelect($event)">
+                    </jqxTree>
+                  </jqxDropDownButton>
+                </div>
+              </div> -->
+            </div>
+        </nb-card-body>
+      </nb-card>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col" *ngIf="this._pgRolID && this._wkID && this._usrID">
+    <ngx-ts-uc-discview
+    [inRolID]="this._pgRolID" [inWeekID]="this._wkID" [inUserID]="this._usrID"
+    [inCallOff]="this._calOff" [inTSPrj]="this._tsPrj"
+    [inDtWk]="this.dtWk"
+    [inRolCode]="this._rolCode"
+    >
+    </ngx-ts-uc-discview>
+  </div>
+</div>
+
+

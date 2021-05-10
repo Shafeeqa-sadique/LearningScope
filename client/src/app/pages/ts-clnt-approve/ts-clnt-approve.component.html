@@ -1,0 +1,106 @@
+<div >
+<nb-card>
+  <nb-card-header>Approve Weekly Timesheet</nb-card-header>
+  <nb-card-body>
+       <form [formGroup]="frmGroup"  >
+       <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group" >
+               <label for="tsName" class="label">Weekly Timesheet Report</label>
+               <select #tsName class="form-control" formControlName="tsName"
+               (change)='onSelectTsName(tsName.value)'>
+                 <option value="{{s.Id}}" *ngFor="let s of dtWkTimesheet">{{s.WkName}}</option>
+               </select>
+
+            </div>
+        </div>
+       </div>
+       <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="form-group" >
+            <label for="dtFrom" class="label">From</label>
+            <input nbInput type="text" fullWidth fieldSize="small" [readonly]="true"
+            formControlName="dtFrom">
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="form-group" >
+          <label for="dtTo" class="label">To</label>
+            <input nbInput type="text" fullWidth fieldSize="small" [readonly]="true"
+            formControlName="dtTo">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group" >
+               <label for="tsDepart" class="label">Call Off NO - Timesheet Project</label>
+               <select #tsDepart class="form-control" formControlName="tsDepart"
+               (change)='onSelectDept(tsDepart.value)'>
+                 <option value="{{s.Id}}" *ngFor="let s of dtDllDpt">{{s.DispName}}</option>
+               </select>
+                <!-- <control-messages [control]="frmGroup.controls.tsDepart"  ></control-messages> -->
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group" >
+              <textarea formControlName="tsCmt" nbInput fullWidth placeholder="Approval / Rejection Comments"></textarea>
+              <!-- <control-messages [control]="frmGroup.controls.tsCmt"  ></control-messages> -->
+            </div>
+         </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9 col-sm-12">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12  text-center ">
+                  <button class="btn btn-outline-primary mr-2" style="margin-top: 5px;" type="submit" (click)="onSubmitTS(true)" nbButton status="success" [disabled]="!isSubmitOk"  >Approve Timesheet</button>
+                  <button class="btn btn-outline-primary mr-2" style="margin-top: 5px;" type="submit" (click)="onSubmitTS(false)" nbButton status="danger" [disabled]="!isSubmitOk">Reject Timesheet</button>
+                  <div class="btn mr-2" >
+                      <jqxProgressBar #jdxPrg
+                                    [animationDuration]="0"
+                                    [width]="250"
+                                    [height]="20"
+                                    [value]="0"
+                                    [showText]="true"
+                                    [renderText]="prgBarRenderText"
+                                    [template]="'success'">
+                    </jqxProgressBar>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-header>Weekly Timesheet Details</nb-card-header>
+  <nb-card-body>
+    <div *ngIf="dataAdapter">
+      <jqxGrid
+      [width]="grdGetWidth()"
+      [theme]="'office'"
+      [source]="dataAdapter"
+      [columns]="grdColumns"
+      [sortable]="true" [pageable]="true"  [columnsresize]="true"
+      [showstatusbar]="true"
+      [pageable]="true"
+      [editable]="false"
+      [sortable]="true"
+      [filterable]="true"
+      [showaggregates]="false"
+      [filterable]="true"
+      [autoshowfiltericon]="true"
+      [autoheight]="true"
+      [pagermode]="'simple'"
+      [autoheight]="true"
+      [columnsresize]="true"
+      [columngroups]="grdColGrp"
+      #grdTS>
+      </jqxGrid>
+    </div>
+  </nb-card-body>
+</nb-card>
+</div>

@@ -1,0 +1,63 @@
+<nb-card>
+  <nb-card-header>
+    <!-- <div class="modal-header" > -->
+    <div>
+      <span class="modal-title">Timesheet - Approve / Reject</span>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="this.dismiss()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="form-group col-md-12 col-sm-12 col-xs-12">
+        <label for="txtName" class="label">Name</label>
+          <input    nbInput
+          fullWidth
+          fieldSize="small"
+          [readonly]="true"
+          [formControl]="txtName"
+          placeholder="Approval Remarks"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12 col-sm-12 col-xs-12">
+        <label for="tsAppRmks" class="label">Approval / Reject Remarks</label>
+        <input
+          nbInput
+          fullWidth
+          fieldSize="large"
+          [readonly]="false"
+          [formControl]="txtRmks"
+          placeholder="Approval Remarks"
+        />
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+      <!-- <button class="btn btn-outline-primary mr-2" style="margin-top: 5px;" type="submit" (click)="onSubmitTS(true)" nbButton status="success">Accept Timesheet</button>
+      <button class="btn btn-outline-primary mr-2" style="margin-top: 5px;" type="submit" (click)="onSubmitTS(false)" nbButton status="danger">Reject Timesheet</button> -->
+
+      <div class="row">
+        <div
+          class="col-md-12 col-sm-12 col-xs-12 text-center"
+          *ngIf="this.dtBtnAction.length > 0"
+        >
+          <button
+            nbButton
+            class="btn btn-outline-primary mr-2"
+            style="margin-top: 5px"
+            type="submit"
+            [status]="itm.NxtStatusColor"
+            *ngFor="let itm of this.dtBtnAction; let i = index"
+            (click)="onSubmitTS(itm.LkNxtStatusCodeId)"
+            [id]="itm.ID"
+            #disable
+          >
+            {{ itm.CurrStatusDesc }}
+          </button>
+        </div>
+      </div>
+
+  </nb-card-footer>
+</nb-card>

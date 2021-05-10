@@ -1,0 +1,57 @@
+<div class="row"
+[nbSpinner]="isProg"
+nbSpinnerSize="large"
+nbSpinnerStatus="danger"
+>
+  <div class="col">
+      <div class="row">
+        <div class="col" *ngIf="grdDA">
+          <jqxTreeGrid
+                  [width]="'100%'"
+                  [source]="grdDA"
+                  [pageable]="true"
+                  [editable]="false"
+                  [sortable]="true"
+                  [filterable]="true"
+                  [altRows]="false"
+                  [columnsHeight]="25"
+                  [pagerButtonsCount]="8"
+                  [toolbarHeight]="25"
+                  [columns]="grdCol"
+                  [columnGroups]="grdColGrp"
+                  [columnsResize]="true"
+                  [columnsReorder]="true"
+                  [autoRowHeight]="false"
+                  [height]="400"
+                  [theme]="'office'"
+                  [enableHover]="true"
+                  [rendered]="grdRendered"
+                  (onRowClick)="grdRowClick($event)"
+
+                  #grdTS>
+          </jqxTreeGrid>
+          <!-- <jqxGrid #grdTS
+          [width]="'100%'" [source]="grdDA"
+          [columns]="grdCol"
+          [columngroups]="grdColGrp"
+          [showstatusbar]="false"
+          [showaggregates]="false"
+          [filterable]="true" [autoshowfiltericon]="true"
+          [autoheight]="true"
+          [pagermode]="'simple'" [pagesize]="15" [pageable]="true"
+          [autoheight]="true"
+          [theme]="'office'"
+          [sortable]="true"
+          [columnsresize]="true"
+          [columnsreorder]='true'
+          [columnsheight]='25'
+          [rowsheight]='27'
+          (onRowclick)="grdRowClick($event)"
+          [rendered]="grdRendered"
+          >
+          </jqxGrid> -->
+      </div>
+      </div>
+  </div>
+</div>
+

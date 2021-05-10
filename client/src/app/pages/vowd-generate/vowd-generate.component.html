@@ -1,0 +1,127 @@
+
+<div class="row">
+  <div class="col">
+    <nb-card>
+      <nb-card-header>Generate VOWD Report</nb-card-header>
+      <nb-card-body>
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-3">
+            <form [formGroup]="FrmGrpVowd" enctype="multipart/form-data"  class="form-horizontal">
+              <div class="form-group">
+                <label for="cutOfDtStrt" class="label">VOWD Cut Off Date</label>
+                <input formControlName="cutOfDtStrt"  nbInput
+                  fullWidth fieldSize="small" type="text"
+                  [nbDatepicker]="pickerCutOff">
+                <nb-datepicker #pickerCutOff ></nb-datepicker>
+                <control-messages [control]="FrmGrpVowd.controls.cutOfDtStrt"></control-messages>
+                <!-- <jqxDropDownList  (onSelect)="listOnSelect($event)" id="vowdReport"
+                [width]="200" [height]="30" [source]="dataAdapter" [selectedIndex]="2"
+                [displayMember]="'ContactName'" [valueMember]="'CompanyName'">
+                </jqxDropDownList> -->
+              </div>
+              <div class="form-group">
+                <label for="cutOfDtEnd" class="label">VOWD Forecast End Date</label>
+                <input formControlName="cutOfDtEnd"  nbInput
+                  fullWidth fieldSize="small" type="text"
+                  [nbDatepicker]="pickerFDt">
+                <nb-datepicker #pickerFDt ></nb-datepicker>
+                <control-messages [control]="FrmGrpVowd.controls.cutOfDtEnd"></control-messages>
+              </div>
+              <button type="submit" (click)="onGenerateRpt()" nbButton status="info">Generate Report</button>
+            </form>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <nb-card>
+      <nb-card-header>VOWD Report</nb-card-header>
+      <nb-card-body>
+        <div class="row float-right">
+          <div class="col-3">
+            <!-- <div
+            id="btnExport"
+            (click)="evtGrdExportXL()"
+            title=""
+            class="buttonRipple jqx-rc-all jqx-rc-all-material jqx-button jqx-button-material jqx-widget jqx-widget-material jqx-fill-state-normal jqx-fill-state-normal-material"
+            tabindex="-1"
+            role="button"
+            aria-disabled="false"
+            style="
+              float: left;
+              margin-left: 5px;
+              width: 100px;
+              box-sizing: border-box;
+              height: 24px;
+              position: relative;
+              overflow: hidden;
+            "
+          >
+            <img
+              src=""
+              width="16"
+              height="16"
+              style="display: none; position: absolute; left: 61.5px; top: 11px;"
+            /><span
+              style="display: inline; position: absolute; left: 10px; top: 4px;"
+              ><i class="far fa-file-alt"></i> Export XL</span
+            >
+            </div> -->
+            <button class="btn btn-default" nbButton
+                      size="small"
+                      type="button" (click)="evtGrdExportXL()"
+                       >
+                      Export To XL
+            </button>
+          </div>
+          <div class="col-9">
+            <div class="input-group">
+              <input
+                  height="16"
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="xlLinkURL"
+                  placeholder="Select Cut off date to the XL link"
+              />
+              <span class="input-group-append">
+                  <button class="btn btn-default" nbButton
+                      size="small"
+                      type="button"
+                      ngxClipboard
+                      [cbContent]="xlLinkURL"
+                      (cbOnSuccess)="isCopied1 = true"
+                      [class.btn-success]="isCopied1">
+                      Copy XL Link
+                  </button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col">
+            <jqxTreeGrid
+            [width]="grdGetWidth()"
+            [source]="dataAdapter"
+            [pageable]="true"
+            [editable]="false"
+            [sortable]="true"
+            [filterable]="true"
+            [showToolbar]="false"
+            [altRows]="true"
+            [pagerButtonsCount]="8"
+            [toolbarHeight]="35"
+            [columns]="grdColumns"
+            [columnsResize]="true"
+            [selectionMode]="'singleRow'"
+            #grdVOWD>
+            </jqxTreeGrid>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

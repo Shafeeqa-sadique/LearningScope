@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col">
+    <nb-card>
+      <nb-card-header>SNC Director Approval</nb-card-header>
+      <nb-card-body class="col-md-12 col-sm-12 col-xs-12">
+        <form [formGroup]="frmGrp">
+          <div class="row">
+            <div class="form-group col-md-3 col-sm-12 col-xs-12">
+              <label  class="label">Timesheet Period</label>
+              <select
+                #tsName
+                class="form-control"
+                formControlName="tsName"
+                (change)="onSelectTsName(tsName.value)"
+              >
+                <option value="{{ s.Id }}" *ngFor="let s of dtWk">
+                  {{ s.WkName }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-md-3 col-sm-12 col-xs-12">
+              <label  class="label">From</label>
+              <input
+                nbInput
+                type="text"
+                fullWidth
+                fieldSize="small"
+                [readonly]="true"
+                formControlName="dtFrom"
+              />
+            </div>
+            <div class="form-group col-md-3 col-sm-12 col-xs-12">
+              <label class="label">To</label>
+              <input
+                nbInput
+                type="text"
+                fullWidth
+                fieldSize="small"
+                [readonly]="true"
+                formControlName="dtTo"
+              />
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <nb-card>
+      <nb-card-header>Timesheet Review</nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col">
+            <ngx-ts-uc-director
+            *ngIf="this._pgRolID && this._pgWkID"
+            [inRolID]="this._pgRolID" [inDtWk]="dtWk" [inWeekID]="this._pgWkID"
+            ></ngx-ts-uc-director>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="form-group col-md-12 col-sm-12 col-xs-12">
+            <label for="tsAppRmks" class="label">Approval / Reject Remarks</label>
+            <input
+              nbInput
+              fullWidth
+              fieldSize="large"
+              [readonly]="false"
+              placeholder="Approval Remarks"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+            <button
+            nbButton
+            class="btn btn-outline-primary mr-2"
+            style="margin-top: 5px"
+            type="submit"
+            status="success"
+            id="btnApprove"
+            #disable
+            >
+            Approve Timesheet
+            </button>
+            <button
+            nbButton
+            class="btn btn-outline-primary mr-2"
+            style="margin-top: 5px"
+            type="submit"
+            status="danger"
+            id="btnReject"
+            #disable
+            >
+            Reject Timesheet
+            </button>
+          </div>
+        </div> -->
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

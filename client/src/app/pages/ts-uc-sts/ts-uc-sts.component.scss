@@ -1,0 +1,22 @@
+.model-full {
+  width: 100% !important;
+  height: 100% !important;
+
+  .cdk-visually-hidden {
+    width: 99% !important;
+    height: 99% !important;
+  }
+
+  nb-dialog-container {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+nb-card {
+  margin-top: 4px;
+  margin-bottom: 3px;
+}
+nb-card-header {
+  padding-top: 4px;
+  padding-bottom: 3px;
+}

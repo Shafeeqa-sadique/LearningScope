@@ -1,0 +1,44 @@
+ <select  [formControl]="ddlID"  height="8px"  (ngModelChange)='onSelect(ddlID)'>
+   <option [ngValue]="s.DISP_VALUE" *ngFor="let s of dtData">{{s.DISP_NAME}}</option>
+ </select>
+
+
+
+  <!-- <select  [formControl]="ddlID"  height="8px"
+  (change)='onSelect(ddlID)'
+  >
+    <option value="{{s.DISP_VALUE}}" *ngFor="let s of dtData" [selected]="s.id==this.ctlSltID"
+    >{{s.DISP_NAME}}</option>
+  </select> -->
+
+<!-- <select *ngIf="this.ddlCode=='CBS'" #tsDepart  height="8px"
+(change)='onSelect(tsDepart)'  >
+  <option value="{{s.id}}" *ngFor="let s of dtData" [selected]="s.id==this.ctlSltID" >{{s.desc}}</option>
+</select>
+<select *ngIf="ddlCode=='PAF'"   #tsCode  height="8px"
+(change)='onSelect(tsCode)'  >
+  <option value="{{s.DISP_VALUE}}" *ngFor="let s of dtData" [selected]="s.id==this.ctlSltID" >{{s.DISP_NAME}}</option>
+</select> -->
+
+
+<!-- <select *ngIf="this.ddlCode=='CBS'" #tsDepart  height="8px"
+(change)='onSelect(tsDepart)'  >
+  <option value="{{s.id}}" *ngFor="let s of dtData" [selected]="s.id==this.ctlSltID" >{{s.desc}}</option>
+</select>
+<select *ngIf="this.ddlCode=='PAF'" #tsCode  height="8px"
+(change)='onSelect(tsDepart)'  >
+  <option value="{{s.DISP_VALUE}}" *ngFor="let s of dtData" [selected]="s.id==this.ctlSltID" >{{s.DISP_NAME}}</option>
+</select> -->
+
+<!-- <input
+[ngModel]="this.ctlSltID"
+(ngModelChange)="onModelChange($event)"
+nbInput
+type="text"
+placeholder="ngModel"
+[nbAutocomplete]="autoNgModel" />
+<nb-autocomplete #autoNgModel>
+  <nb-option *ngFor="let s of dtData" [value]="s.id">
+    {{ s.desc }}
+  </nb-option>
+</nb-autocomplete> -->

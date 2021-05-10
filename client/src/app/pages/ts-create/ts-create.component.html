@@ -1,0 +1,269 @@
+<style>
+  nb-card {
+    margin-top: 4px;
+    margin-bottom: 3px;
+  }
+  nb-card-header {
+    padding-top: 4px;
+    padding-bottom: 3px;
+  }
+</style>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <nb-card>
+      <nb-card-header>Weekly Timesheet Period</nb-card-header>
+      <nb-card-body class="col-md-12 col-sm-12 col-xs-12">
+        <form [formGroup]="frmGroup">
+          <div class="row">
+            <div class="form-group col-md-4 col-sm-12 col-xs-12">
+              <label for="tsName" class="label">Timesheet Period</label>
+              <select
+                #tsName
+                class="form-control"
+                formControlName="tsName"
+                (change)="onSelectTsName(tsName.value)"
+              >
+                <option value="{{ s.Id }}" *ngFor="let s of dtWk">
+                  {{ s.WkName }}
+                </option>
+              </select>
+              <control-messages
+                [control]="frmGroup.controls.tsName"
+              ></control-messages>
+            </div>
+            <div class="form-group col-md-4 col-sm-12 col-xs-12">
+              <label for="dtFrom" class="label">From</label>
+              <input
+                nbInput
+                type="text"
+                fullWidth
+                fieldSize="small"
+                [readonly]="true"
+                formControlName="dtFrom"
+              />
+            </div>
+            <div class="form-group col-md-4 col-sm-12 col-xs-12">
+              <label for="dtTo" class="label">To</label>
+              <input
+                nbInput
+                type="text"
+                fullWidth
+                fieldSize="small"
+                [readonly]="true"
+                formControlName="dtTo"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-4 col-sm-12 col-xs-12">
+              <label for="tsSts" class="label">Timesheet Status</label>
+              <input
+                nbInput
+                type="text"
+                fullWidth
+                fieldSize="small"
+                [readonly]="true"
+                formControlName="tsSts"
+              />
+            </div>
+            <div class="form-group col-md-8 col-sm-12 col-xs-12">
+              <label for="tsAppRmks" class="label">Approval Remarks</label>
+              <input
+                nbInput
+                fullWidth
+                fieldSize="small"
+                [readonly]="true"
+                formControlName="tsAppRmks"
+                placeholder="Approval Remarks"
+              />
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <nb-card
+      [nbSpinner]="isSubmitProg"
+      nbSpinnerSize="large"
+      nbSpinnerStatus="danger"
+    >
+      <nb-card-header>Submit Timesheet</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="frmGrp2">
+          <!-- <div class="row">
+            <div class="col">
+              <div class="row">
+                <nb-card class="col-12">
+
+                  <div class="row">
+
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group" style="margin-top: 5px">
+                        <label for="file" class="label"
+                          >Upload Overtime Approval Email :</label
+                        >
+                        <input
+                          nbInput
+                          type="file"
+                          formControlName="file"
+                          id="file"
+                          style="font-size: 12px"
+                          (change)="onFileChange($event)"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div
+                        class="form-group"
+                        style="margin-top: 10px"
+                        *ngIf="atchLink"
+                      >
+                        <label for="file" class="label">Attachment :</label>
+                        <a #lnkAtch [href]="atchLink" target="_blank">{{
+                          atchFlName
+                        }}</a>
+                      </div>
+                    </div>
+                  </div>
+                </nb-card>
+              </div>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col" >
+              <div class="row">
+                <div class="col-md-2"
+                  [ngClass]="{'disabledbutton': this.isSubmitOk === false}">
+                  <div class="form-group">
+                    <button
+                      class="btn btn-outline-primary mr-2"
+                      type="submit"
+                      (click)="evtGrdAdd()"
+                      nbButton
+                      hero
+                      size="small"
+                      status="ghost"
+                    >
+                      <span class="fas fa-plus-square fa-lg"></span>Add New Task
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="input-group input-group-sm mb-3  col-md-4 col-sm-6 col-xs-12"
+                  [ngClass]="{'disabledbutton': this.isSubmitOk === false}">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Attach Overtime Approval</span>
+                  </div>
+                  <div class="custom-file">
+                    <!-- accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" -->
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                    formControlName="file"
+                    (change)="handleFileInputRMXL($event.target.files)">
+                    <label class="custom-file-label" for="inputGroupFile01">{{this.flName}}</label>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div
+                    class="form-group"
+                    style="margin-top: 10px"
+                    *ngIf="atchLink">
+                    <label for="file" class="label">Attachment :</label>
+                    <a #lnkAtch [href]="atchLink" target="_blank">{{
+                      atchFlName
+                    }}</a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div
+                  class="col"
+                  *ngIf="ddlSrcAFEType.length > 0 && ddlSrcAFE.length > 0"
+                  [ngClass]="{'disabledbutton': this.isSubmitOk === false}"
+                >
+                  <!--  -->
+                  <ag-grid-angular
+                    #grdTS
+                    style="width: 100%; height: 250px"
+                    class="ag-theme-balham"
+                    groupHeaderHeight="30"
+                    headerHeight="28"
+                    [columnDefs]="grdCol"
+                    [defaultColDef]="grdDefltColDef"
+                    [pagination]="false"
+                    [rowData]="grdRowData"
+                    (gridReady)="onGrdReady($event)"
+                    [frameworkComponents]="grdFramewrkComp"
+                    getRowHeight="40"
+                    singleClickEdit="true"
+                    [stopEditingWhenGridLosesFocus]="true"
+                  ></ag-grid-angular>
+
+                  <!-- [editType] = "'fullRow'" -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col"  *ngIf="this.dtBtnAction.length > 0">
+                  <div class="form-group" style="margin-top: 5px">
+                    <input
+                      nbInput
+                      fullWidth
+                      fieldSize="medium"
+                      formControlName="TsSubmitRmks"
+                      placeholder="Timesheet Remarks"
+                      maxlength="128"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div
+                  class="col-md-12 col-sm-12 col-xs-12 text-center"
+                  *ngIf="this.dtBtnAction.length > 0"
+                >
+                  <button
+                    nbButton
+                    class="btn btn-outline-primary mr-2"
+                    style="margin-top: 5px"
+                    type="submit"
+                    [status]="itm.NxtStatusColor"
+                    *ngFor="let itm of this.dtBtnAction; let i = index"
+                    (click)="onSubmitTS(itm.LkNxtStatusCodeId)"
+                    [id]="itm.ID"
+                    #disable
+                  >
+                    {{ itm.CurrStatusDesc }}
+                  </button>
+
+                  <!-- <button
+                  class="btn btn-outline-primary mr-2"
+                  style="margin-top: 5px"
+                  type="submit"
+                  (click)="onSubmitTS(this._TSNxtStsDraftID)"
+                  nbButton
+                  status="success"
+                  [disabled]="!isSubmitOk">
+                  Save Draft
+                </button>
+
+                  <button
+                  class="btn btn-outline-primary mr-2"
+                  style="margin-top: 5px"
+                  type="submit"
+                  (click)="onSubmitTS(this._TSNxtStsDraftID)"
+                  nbButton
+                  status="danger"
+                  [disabled]="!isSubmitOk">
+                  Submit Timesheet
+                </button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

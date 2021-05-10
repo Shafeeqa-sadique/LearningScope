@@ -1,0 +1,228 @@
+<style>
+  nb-card {
+    margin-top: 4px;
+    margin-bottom: 3px;
+  }
+  nb-card-header {
+    padding-top: 4px;
+    padding-bottom: 3px;
+  }
+  nb-card-body {
+    padding-top: 4px;
+    padding-bottom: 3px;
+  }
+</style>
+<div class="row">
+  <div class="col">
+    <form [formGroup]="frmGroup"  >
+      <nb-card>
+        <nb-card-header style="padding-top: 3px; padding-bottom: 3px;">SNC Lead Approval</nb-card-header>
+        <nb-card-body>
+            <div class="row">
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="form-group" >
+                    <label for="tsName" class="label">Weekly Timesheet Report</label>
+                    <select
+                    #tsName
+                    class="form-control"
+                    formControlName="tsName"
+                    (change)="onSelectTsName(tsName.value)"
+                  >
+                    <option value="{{ s.Id }}" *ngFor="let s of dtWk">
+                      {{ s.WkName }}
+                    </option>
+                  </select>
+                      <control-messages [control]="frmGroup.controls.tsName"  ></control-messages>
+                  </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group" >
+                  <label for="dtFrom" class="label">From</label>
+                  <input nbInput type="text" fullWidth fieldSize="small" [readonly]="true"
+                  formControlName="dtFrom">
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group" >
+                <label for="dtTo" class="label">To</label>
+                  <input nbInput type="text" fullWidth fieldSize="small" [readonly]="true"
+                  formControlName="dtTo">
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <!-- <div class="form-group" >
+                  <label for="dtFrom" class="label">Choose Timesheet Project</label>
+                  <jqxDropDownButton #treDll  [width]="250" [height]="25">
+                    <jqxTree id="treID"  style="border: none;" #treID
+                    [width]="250" [height]="400" [source]="treRecords" (onSelect)="onTreSelect($event)">
+                    </jqxTree>
+                  </jqxDropDownButton>
+                </div> -->
+              </div>
+            </div>
+        </nb-card-body>
+      </nb-card>
+      <!-- <div class="row">
+        <div class="col">
+          <nb-card>
+            <nb-card-header >FOR CONTRACTOR :</nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Intial By:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCrLdIName"  type="text" class="form-control" aria-label="Intial By:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Approve / Reject:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCrLdIAp"  type="text" class="form-control" aria-label="Approve / Reject:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Date:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCrLdIDt"  type="text" class="form-control" aria-label="Date:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Authorized By:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCrMgrAName"  type="text" class="form-control" aria-label="Intial By:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Approve / Reject:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCrMgrAAp"  type="text" class="form-control" aria-label="Approve / Reject:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Date:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCrLdIDt"  type="text" class="form-control" aria-label="Date:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        <div class="col">
+          <nb-card>
+            <nb-card-header >FOR COMPANY :</nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Intial By:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCoLdIName"  type="text" class="form-control" aria-label="Intial By:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Approve / Reject:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCoLdIAp"  type="text" class="form-control" aria-label="Approve / Reject:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Date:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCoLdIDt"  type="text" class="form-control" aria-label="Date:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Intial By:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCoMgrAName"  type="text" class="form-control" aria-label="Intial By:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Approve / Reject:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCoMgrAAp"  type="text" class="form-control" aria-label="Approve / Reject:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <div class="input-group input-group-sm" >
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" >Date:</span>
+                        </div>
+                        <input [readOnly]="true" style="height: auto;" formControlName="ctCoMgrADt"  type="text" class="form-control" aria-label="Date:" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div> -->
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col" *ngIf="this._pgRolID && this._wkID && this._usrID">
+    <ngx-ts-uc-discview
+    [inRolID]="this._pgRolID" [inWeekID]="this._wkID" [inUserID]="this._usrID"
+    [inCallOff]="this._calOff" [inTSPrj]="this._tsPrj"
+    [inDtWk]="this.dtWk"
+    [inRolCode]="this._rolCode"
+    >
+    </ngx-ts-uc-discview>
+  </div>
+</div>
+
+

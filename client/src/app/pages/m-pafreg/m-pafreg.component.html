@@ -1,0 +1,71 @@
+<nb-card>
+  <nb-card-header>PAF Register</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <button
+              class="btn btn-outline-primary mr-2"
+              type="submit"
+              (click)="onAddRew()" nbButton hero size="small" status="ghost"><span class="fas fa-plus-square fa-2x"></span>Add New PAAF</button>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="form-group">
+              <input
+                #txtFlt
+                nbInput
+                type="text"
+                fullWidth
+                fieldSize="small"
+                [readonly]="false"
+                placeholder="Full Search.."
+                (keyup)="onGrdFltrTxtChange(txtFlt.value)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-8">
+
+          </div>
+          <div class="col-4">
+            <button
+            class="btn btn-outline-primary mr-2"
+            type="submit"
+            (click)="expXL()" nbButton hero size="small" ><i style="color: #1D6F42;" class="fas fa-file-excel fa-2x"></i> Export Xl</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" *ngIf="grdCol">
+        <ag-grid-angular
+        #grdTS
+        style="width: 100%; height: 550px"
+        id="grdTS"
+        class="ag-theme-balham"
+        groupHeaderHeight="30"
+        headerHeight="30"
+        [columnDefs]="grdCol"
+        [defaultColDef]="grdDefltColDef"
+        [pagination]="true"
+        [rowData]="grdRowData"
+        [editType] = "'fullRow'"
+        (gridReady)="onGrdReady($event)"
+        (cellClicked)="onCellClicked($event)"
+        [frameworkComponents]="grdFramewrkComp"
+        (rowValueChanged)="onGrdRowValueChanged($event)"
+        [stopEditingWhenGridLosesFocus]="false"
+        suppressClickEdit=true
+        getRowHeight="40"
+        paginationPageSize=5000
+      ></ag-grid-angular>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="col">
+    <nb-card>
+      <nb-card-header>ROO Contract Admin</nb-card-header>
+      <nb-card-body class="col-md-12 col-sm-12 col-xs-12">
+        <form [formGroup]="frmGrp">
+          <div class="row">
+            <div class="form-group col-md-3 col-sm-12 col-xs-12">
+              <label  class="label">Timesheet Period</label>
+              <select
+                #tsName
+                class="form-control"
+                formControlName="tsName"
+                (change)="onSelectTsName(tsName.value)"
+              >
+                <option value="{{ s.Id }}" *ngFor="let s of dtWk">
+                  {{ s.WkName }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-md-3 col-sm-12 col-xs-12">
+              <label  class="label">From</label>
+              <input
+                nbInput
+                type="text"
+                fullWidth
+                fieldSize="small"
+                [readonly]="true"
+                formControlName="dtFrom"
+              />
+            </div>
+            <div class="form-group col-md-3 col-sm-12 col-xs-12">
+              <label class="label">To</label>
+              <input
+                nbInput
+                type="text"
+                fullWidth
+                fieldSize="small"
+                [readonly]="true"
+                formControlName="dtTo"
+              />
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group" >
+                <label for="dtFrom" class="label">Choose Timesheet Project</label>
+                <jqxDropDownButton #treDll  [width]="250" [height]="25">
+                  <jqxTree id="treID"  style="border: none;" #treID
+                  [width]="250" [height]="400" [source]="treRecords" (onSelect)="onTreSelect($event)">
+                  </jqxTree>
+                </jqxDropDownButton>
+              </div>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <nb-card
+    [nbSpinner]="isProg"
+    nbSpinnerSize="large"
+    nbSpinnerStatus="danger"
+    >
+      <nb-card-header>Timesheet Review</nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col">
+            <button class="btn" (click)="grdExportXL()"><i class="fas fa-file-excel"></i>Export</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <jqxTreeGrid
+                      [width]="'100%'"
+                      [source]="grdDA"
+                      [pageable]="true"
+                      [pageSize]="10"
+                      [editable]="true"
+                      [sortable]="true"
+                      [filterable]="false"
+                      [altRows]="false"
+                      [columnsHeight]="25"
+                      [pagerButtonsCount]="8"
+                      [toolbarHeight]="25"
+                      [columns]="grdCol"
+                      [columnGroups]="grdColGrp"
+                      [columnsResize]="true"
+                      [columnsReorder]="true"
+                      [selectionMode]="'simple'"
+                      [autoRowHeight]="false"
+                      [editSettings]="grdEditSetting"
+                      [height]="400"
+                      [theme]="'office'"
+                      [enableHover]="true"
+                      #grdTS>
+              </jqxTreeGrid>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
