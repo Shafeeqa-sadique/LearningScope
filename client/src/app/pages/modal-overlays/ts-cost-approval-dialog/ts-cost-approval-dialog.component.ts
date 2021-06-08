@@ -61,7 +61,6 @@ export class TsCostApprovalDialogComponent implements OnInit {
     // GET NEXT ACTION DETAILS
     this.srSPXLst.getWFNxtAction(pCurrStsID, this._pgRolID, this.srGlbVar.nxtActionGrpUser).subscribe(rs2 => {
      this.dtBtnAction = rs2.d.results;
-     console.log(this.dtBtnAction);
    });
   }
 
@@ -76,8 +75,7 @@ export class TsCostApprovalDialogComponent implements OnInit {
           'PAAF No' : dt[dt.length - 1].PAAFNo + '-' + dt[dt.length - 1].Rev,
           'Name' : dt[dt.length - 1].Name,
           'Job Title': dt[dt.length - 1].PAAFJobTitle,
-          'Call Off No': this.inCallOff,
-          'Timesheet Project': this.inTSPrj,
+          'Discipline': dt[dt.length - 1].Discipline
         };
         this._emailPAFInfo.push(rw);
       }
@@ -98,7 +96,6 @@ export class TsCostApprovalDialogComponent implements OnInit {
       LkActionByUsrNameId: this.srLoginInfo.loginId,
       LkActionByRoleNameId: this._pgRolID,
     };
-    console.log(rw);
     const rwSumSts ={
       LkStatusCodeId: pNxtStsID,
       LkWkNameId: this.inWkId,
@@ -121,7 +118,7 @@ export class TsCostApprovalDialogComponent implements OnInit {
           ) {
           this.srSPXLst.addSendNxtStatusEmail(
             this.srLoginInfo.AlrtEmail, dsNxtDesc,
-            pNxtStsID, flt[0].NxtActionOnlyToUsr,
+            pNxtStsID, flt[0].NxtActOnlyToUsr,
             this.inWkName, this.inWkId, this.inUsrId,
             flt[0].NxtStatusEmail,
             null,

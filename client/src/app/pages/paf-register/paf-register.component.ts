@@ -44,12 +44,12 @@ export class PafRegisterComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.fetchPAFReg(false);
-    // this.getPosition();
-    this.getDllInfo('COD_PAF_JOB_TILE');
-    this.getDllInfo('CODE_TIMSHET_PRJ');
-    this.getDllInfo('CODE_PF_EMP_STS');
-    this.getDllInfo('CODE_PF_PAF_STS');
+    // this.fetchPAFReg(false);
+    // // this.getPosition();
+    // this.getDllInfo('COD_PAF_JOB_TILE');
+    // this.getDllInfo('CODE_TIMSHET_PRJ');
+    // this.getDllInfo('CODE_PF_EMP_STS');
+    // this.getDllInfo('CODE_PF_PAF_STS');
   }
 
   getWidth(): any {

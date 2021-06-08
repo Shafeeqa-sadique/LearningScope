@@ -24,12 +24,11 @@ export class SPXlstService extends SPXapi {
   lsUsrRol: string = 'LS_ROLE_USR';
 
   lsMCBS: string = 'LS_M_CBS';
-  lsMPAF: string = 'LS_M_PAF_REGISTER';
   lsMRol: string = 'LS_M_ROLE';
   lsMSts: string = 'LS_M_STATUS';
   lsMTsRoleSts: string = 'LS_TS_STATUS_ROLE';
   lsAtch: string = 'LS_TS_WK_ATTACH';
-  lsMPaf: string = 'LS_M_PAF_REGISTER_1';
+  lsMPaf: string = 'LS_M_PAF_REGISTER';
   lsAppName: string='LS_TS_APPROVER';
   lsAppGrp: string='LS_TS_APPROVER_GRP';
   lsPAFRnR: string='LS_PAF_ROTATION';
@@ -133,7 +132,7 @@ export class SPXlstService extends SPXapi {
 
   getPrjCalOffPAF() {
 
-    let qry = `/_api/web/lists/GetByTitle('${this.lsMPAF}')/items?$select=Id,CallOffNumber,TSProject`;
+    let qry = `/_api/web/lists/GetByTitle('${this.lsMPaf}')/items?$select=Id,CallOffNumber,TSProject`;
     const obj = this.get(qry).pipe(
       map(res => JSON.parse(JSON.stringify(res)) ),
     );
@@ -424,7 +423,7 @@ export class SPXlstService extends SPXapi {
 
 
   getMPAF() {
-    const qry = '/_api/web/lists/GetByTitle(\'' + this.lsMPAF + '\')/items?$top=5000';
+    const qry = '/_api/web/lists/GetByTitle(\'' + this.lsMPaf + '\')/items?$top=5000';
     return this.getSPX(qry);
   }
 
@@ -463,6 +462,7 @@ export class SPXlstService extends SPXapi {
       );
   }
 
+
   addSendNxtStatusEmail(pCcEmail, pAction,
      pNxtStsId, pIsToUsr,
      pWkName, pWkId, pUsrId,
@@ -474,6 +474,7 @@ export class SPXlstService extends SPXapi {
       if (pEmailCnt.trim().length > 0) {
         const rsTSStsHis = this.getTSWkStsByTSPrjRol(null, null, null, null, pUsrId, pWkId);
         const rsEmail = this.getToEmail(pNxtStsId);
+
         // //GET USERWISE DISCIPLINE ACCESS DETAILS
         //##** THERE IS A FLAW THE DISC TO USER TABLE TO REMOVED
         //const rsDiscUsr = this.getPrjCalOff(pCallOff, pTSPrj, null);
@@ -483,6 +484,8 @@ export class SPXlstService extends SPXapi {
           const dtEmailLst = rs[1].d.results;
           const dtEmailDiscUsr = [];// rs[2].d.results;
           const toEmailLst = [];
+
+
           let emlName = '';
           if (dtEmailLst.length > 0) {
             for (let i = 0; i < dtEmailLst.length; i++) {
@@ -521,8 +524,6 @@ export class SPXlstService extends SPXapi {
             if (pJsonTS !== null) {
               tbs = obj.json2Html(pJsonTS);
             }
-            console.log('ts1')
-            console.log(tbs)
             emlCnt = emlCnt.replace('{wk}', pWkName);
             emlCnt = emlCnt.replace('{tbTS}', tbs);
 
@@ -531,15 +532,15 @@ export class SPXlstService extends SPXapi {
             } else {
              tbs = '';
             }
-            console.log('tb2')
-            console.log(tbs)
             emlCnt = emlCnt.replace('{tbUsrInfo}', tbs);
             emlCnt = emlCnt.replace('{applnk}', this.env.emailURL);
             emlCnt = emlCnt.replace('{rmks}', pRmks);
             emlCnt = emlCnt.replace('{act}', pAction);
+            console.log('TO EMAIL')
             console.log(JSON.parse(JSON.stringify(toEmailLst)));
-            // console.log('GCMC Timesheet - '+pWkName+ ' - ' + pAction)
-            // console.log(emlCnt)
+            console.log('CC EMAIL')
+            console.log(pCcEmail);
+
             this.sendEmail(this.loginInfo.authCode
               , 'collaborationSPAPR@snclavalin.com'
               , JSON.parse(JSON.stringify(toEmailLst))
@@ -1042,17 +1043,17 @@ export class SPXlstService extends SPXapi {
   }
 
   AddPAF(authCode, data) {
-    return this.AddSpx(authCode, data, this.lsMPAF);
+    return this.AddSpx(authCode, data, this.lsMPaf);
   }
 
 
 
   UptPAF(pAuthCode, pData, pId) {
-    return this.UptSpx(pAuthCode, pData, this.lsMPAF, pId);
+    return this.UptSpx(pAuthCode, pData, this.lsMPaf, pId);
   }
 
   DelPAF(pAuthCode, pId) {
-    return this.DelSpx(pAuthCode, this.lsMPAF, pId);
+    return this.DelSpx(pAuthCode, this.lsMPaf, pId);
   }
 
   DelSpx(pAuthCode, pLstName, pId) {

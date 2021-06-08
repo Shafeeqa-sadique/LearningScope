@@ -315,21 +315,25 @@ export class TsCostCtrlComponent implements OnInit {
           text: 'Org Chart Position Title' , datafield: 'OrgChartPositionTitle', width: 180,  cellsalign: 'left', hidden: true,
           align: 'center', editable: false
           , cellclassname: null//, cellclassname: this.cellclass,
+          ,exportable: false
         },
         {
           text: 'Org Chart ID No.' , datafield: 'OrgChartIDNo', width: 120,  cellsalign: 'left', align: 'center', hidden: true,
           editable: false
           , cellclassname: null//, cellclassname: this.cellclass,
+          ,exportable: false
         },
         {
           text: 'Work Location' , datafield: 'ServicesLocation', width: 90,  cellsalign: 'left', align: 'center', hidden: true,
           editable: false
           , cellclassname: null//, cellclassname: this.cellclass,
+          ,exportable: false
         },
         {
           text: 'PAAF No.' , datafield: 'PAAFNo', width: 60,  cellsalign: 'left', align: 'center', hidden: false,
           editable: false
-          , cellclassname: null//cellclassname: this.cellclass,
+          ,cellclassname: null//cellclassname: this.cellclass,
+          ,exportable: true
         },
         {
           text: 'Attachment' , datafield: 'atchUrl', width: 70,  cellsalign: 'left', align: 'center', hidden: false, editable: false,
@@ -338,9 +342,10 @@ export class TsCostCtrlComponent implements OnInit {
           , exportable: false,
         },
         {
-          text: 'CBS Code' , datafield: 'CBSCode', width: 120,  cellsalign: 'left', align: 'center'
+          text: 'CTR Project Code' , datafield: 'CBSCode', width: 120,  cellsalign: 'left', align: 'center'
           , cellclassname: this.cellclass
           , columntype: 'template'
+          , exportable: false
           , createeditor: (row: number, value: any, editor: any): void => {
             editor.jqxDropDownList({ width: '135', height: 22, source: this.ddlDaCbs, displayMember: 'TASK_CODE', valueMember: 'ID' });
           },
@@ -365,13 +370,13 @@ export class TsCostCtrlComponent implements OnInit {
         },
         {
           text: 'Category' , datafield: 'AFEType', width: 60,  cellsalign: 'left', align: 'center'
-          , cellclassname: this.cellclass,
+          , cellclassname: this.cellclass
+          , exportable: false
         },
         {
           text: 'Total Man Days' , datafield: 'TotManDays', width: 60,  cellsalign: 'center', align: 'center', hidden: false,
           editable: false
           , cellclassname: this.cellclass
-          , exportable: true
         },
     ];
     const rsGrpCol = [];
@@ -424,22 +429,22 @@ export class TsCostCtrlComponent implements OnInit {
       , hidden: false, exportable: true
     }
     rsCol.push(colAppr);
-    colAppr =
-    {
-        text: 'Approver Name'
-      , datafield: 'snc_mgr_name', columngroup: 'snc_mgr', width: 90,  cellsalign: 'center', align: 'center'
-      , cellsrenderer: null, cellclassname: null, editable: false
-      , hidden: false, exportable: true
-    }
-    rsCol.push(colAppr);
-    colAppr =
-    {
-        text: 'Status'
-      , datafield: 'snc_mgr_sts', columngroup: 'snc_mgr', width: 90,  cellsalign: 'center', align: 'center'
-      , cellsrenderer: null, cellclassname: null, editable: false
-      , hidden: false, exportable: true
-    }
-    rsCol.push(colAppr);
+    // colAppr =
+    // {
+    //     text: 'Approver Name'
+    //   , datafield: 'snc_mgr_name', columngroup: 'snc_mgr', width: 90,  cellsalign: 'center', align: 'center'
+    //   , cellsrenderer: null, cellclassname: null, editable: false
+    //   , hidden: false, exportable: true
+    // }
+    // rsCol.push(colAppr);
+    // colAppr =
+    // {
+    //     text: 'Status'
+    //   , datafield: 'snc_mgr_sts', columngroup: 'snc_mgr', width: 90,  cellsalign: 'center', align: 'center'
+    //   , cellsrenderer: null, cellclassname: null, editable: false
+    //   , hidden: false, exportable: true
+    // }
+    // rsCol.push(colAppr);
     colAppr =
     {
         text: 'Approver Name'
@@ -456,43 +461,43 @@ export class TsCostCtrlComponent implements OnInit {
       , hidden: false, exportable: true
     }
     rsCol.push(colAppr);
-    colAppr =
-    {
-        text: 'Approver Name'
-      , datafield: 'clnt_mgr_name', columngroup: 'clnt_mgr', width: 90,  cellsalign: 'center', align: 'center'
-      , cellsrenderer: null, cellclassname: null, editable: false
-      , hidden: false, exportable: true
-    }
-    rsCol.push(colAppr);
-    colAppr =
-    {
-        text: 'Status'
-      , datafield: 'clnt_mgr_sts', columngroup: 'clnt_mgr', width: 90,  cellsalign: 'center', align: 'center'
-      , cellsrenderer: null, cellclassname: null, editable: false
-      , hidden: false, exportable: true
-    }
-    rsCol.push(colAppr);
-    colAppr =
-    {
-        text: 'Approver Name'
-      , datafield: 'clnt_drct_name', columngroup: 'clnt_drct', width: 90,  cellsalign: 'center', align: 'center'
-      , cellsrenderer: null, cellclassname: null, editable: false
-      , hidden: false, exportable: true
-    }
-    rsCol.push(colAppr);
-    colAppr =
-    {
-        text: 'Status'
-      , datafield: 'clnt_drct_sts', columngroup: 'clnt_drct', width: 90,  cellsalign: 'center', align: 'center'
-      , cellsrenderer: null, cellclassname: null, editable: false
-      , hidden: false, exportable: true
-    }
-    rsCol.push(colAppr);
+    // colAppr =
+    // {
+    //     text: 'Approver Name'
+    //   , datafield: 'clnt_mgr_name', columngroup: 'clnt_mgr', width: 90,  cellsalign: 'center', align: 'center'
+    //   , cellsrenderer: null, cellclassname: null, editable: false
+    //   , hidden: false, exportable: true
+    // }
+    // rsCol.push(colAppr);
+    // colAppr =
+    // {
+    //     text: 'Status'
+    //   , datafield: 'clnt_mgr_sts', columngroup: 'clnt_mgr', width: 90,  cellsalign: 'center', align: 'center'
+    //   , cellsrenderer: null, cellclassname: null, editable: false
+    //   , hidden: false, exportable: true
+    // }
+    // rsCol.push(colAppr);
+    // colAppr =
+    // {
+    //     text: 'Approver Name'
+    //   , datafield: 'clnt_drct_name', columngroup: 'clnt_drct', width: 90,  cellsalign: 'center', align: 'center'
+    //   , cellsrenderer: null, cellclassname: null, editable: false
+    //   , hidden: false, exportable: true
+    // }
+    // rsCol.push(colAppr);
+    // colAppr =
+    // {
+    //     text: 'Status'
+    //   , datafield: 'clnt_drct_sts', columngroup: 'clnt_drct', width: 90,  cellsalign: 'center', align: 'center'
+    //   , cellsrenderer: null, cellclassname: null, editable: false
+    //   , hidden: false, exportable: true
+    // }
+    // rsCol.push(colAppr);
     rsGrpCol.push({ text: 'SNC Lead', align: 'center', name: 'snc_lead' })
-    rsGrpCol.push({ text: 'SNC Director', align: 'center', name: 'snc_mgr' })
-    rsGrpCol.push({ text: 'ROO Lead', align: 'center', name: 'clnt_lead' })
-    rsGrpCol.push({ text: 'ROO Contract Admin', align: 'center', name: 'clnt_mgr'})
-    rsGrpCol.push({ text: 'ROO Director', align: 'center', name: 'clnt_drct'})
+    //rsGrpCol.push({ text: 'SNC Director', align: 'center', name: 'snc_mgr' })
+    rsGrpCol.push({ text: 'Client Lead', align: 'center', name: 'clnt_lead' })
+    // rsGrpCol.push({ text: 'ROO Contract Admin', align: 'center', name: 'clnt_mgr'})
+    // rsGrpCol.push({ text: 'ROO Director', align: 'center', name: 'clnt_drct'})
     const resData = {
       col : rsCol,
       colGrp : rsGrpCol,
@@ -1086,12 +1091,11 @@ export class TsCostCtrlComponent implements OnInit {
       let rowData = args.row;
       let colDtFld = args.dataField;
       let value = args.value;
-      console.log(rowData);
+
       if(rowData['DAYSID'] !== 0){
         let id = rowData['DAYSID']
         const rw ={}
         rw[colDtFld]= value
-        console.log(rw);
         this.srSPXLst.UptWkTSDays(this.srLoginInfo.authCode,rw,id).subscribe(rs =>{
           console.log(rs)
         },err =>{
@@ -1137,6 +1141,11 @@ export class TsCostCtrlComponent implements OnInit {
      //this.dtAprSNCMgr = this.getApproverDt(this.srGlbVar.rolSNCMGR,false);
       this.dtAprClntLd = this.getApproverDt(this.srGlbVar.rolGCDisLD,false);
       //this.dtAprClntMgr = this.getApproverDt(this.srGlbVar.rolGCMGR,false);
+
+      // console.log(dtPAFRw)
+      // console.log(dtTS)
+      // console.log(dtWkTSDays)
+      console.log(dtWKSts);
       //REMOVE R&R EMPLOYEE FROM TIMESHEET SUBMISSION
       //GET THE JSON IS ARRAY STRING
       let vFltRnRID =''

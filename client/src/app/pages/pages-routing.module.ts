@@ -87,7 +87,7 @@ const routes: Routes = [{
       component: TsSncMgrComponent
     },
     {
-      path: 'ROOLead',
+      path: 'ClientLead',
       component: TsRooLeadComponent
     },
     {

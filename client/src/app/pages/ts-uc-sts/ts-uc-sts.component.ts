@@ -89,12 +89,15 @@ export class TsUcStsComponent implements OnInit {
   getTSData(pRptID: number) {
     this.isProg = true;
     const dtGrdData =[];
+    console.log('test');
     this.srSPXLst.getTSStatus(pRptID,this._rolId).subscribe(rs => {
       const dtTSPAFRw = rs[0].d.results;
       const dtTSDays = rs[1].d.results;
       const dtWKSts = rs[2].d.results;
       this._dtRolSts = rs[3].d.results;
       const dtRnR = rs[4].d.results;
+      console.log('dtTSPAFRw')
+      console.log(dtTSPAFRw)
       //REMOVE R&R EMPLOYEE FROM TIMESHEET SUBMISSION
       //GET THE JSON IS ARRAY STRING
       let vFltRnRID =''

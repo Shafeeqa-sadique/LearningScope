@@ -34,7 +34,7 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
   _tsPrj: string;
   _dtWk: any[] = [];
 
-  _isSNCLD: boolean= false;
+  _isSNCLD: boolean= true;
   dtApproveDtl: any =[]
 
   frmGrp: FormGroup;
@@ -65,6 +65,8 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('this.inRolID')
+    console.log(this.inRolID)
     if ((changes.inWeekID !== undefined) &&
        (changes.inWeekID !== null)) {
           this._wkId = this.inWeekID;
@@ -72,11 +74,11 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
           this._usrId = this.inUserID;
           this._rolId = this.inRolID;
           //this.getAllTSSts(this._wkId);
-          if(this.inRolCode == this.srGlbVar.rolSNCDisLD){
-            this._isSNCLD = true;
-          } else{
-            this._isSNCLD = false;
-          }
+          // if(this.inRolCode == this.srGlbVar.rolSNCDisLD){
+          //   this._isSNCLD = true;
+          // } else{
+          //   this._isSNCLD = false;
+          // }
           this.fnGrdLoadCol();
           if (this.grdSource !== undefined && this.grdTS != undefined) {
             this.grdSource.localdata = [];
@@ -473,7 +475,7 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
         },
         {
           text: 'Status', width: 140, cellsAlign: 'center', align: 'center', columnType: 'none' , sortable: false, dataField: 'btncol'
-          , exportable: false, hidden: true
+          , exportable: false, hidden: false
           , cellsRenderer: (row, dataField, cellValueInternal, rowData, cellText): string => {
             const rw = rowData;
             return `<div id='grd_btn_id_${row}' grd-btn-desc='${rw.TSStsDesc}' grd-row-id='${row}'
@@ -482,23 +484,24 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
           , cellclassname: null
         },
         {
-          text: 'Timesheet Project' , datafield: 'TSPrj', width: 120,  cellsalign: 'left', hidden: false,
-          align: 'center', editable: false
-          , cellclassname: null
-          , exportable: true
-        },
-        {
-          text: 'Org Chart Position Title' , datafield: 'OrgChartPositionTitle', width: 120,  cellsalign: 'left', hidden: false,
-          align: 'center', editable: false
-          , cellclassname: null
-          , exportable: true
-        },
-        {
           text: 'PAAF No.' , datafield: 'PAAFNo', width: 60,  cellsalign: 'left', align: 'center', hidden: true,
           editable: false
           , cellclassname: null
           , exportable: true
         },
+        {
+          text: 'CTR Project Code' , datafield: 'TSPrj', width: 120,  cellsalign: 'left', hidden: false,
+          align: 'center', editable: false
+          , cellclassname: null
+          , exportable: true
+        },
+        {
+          text: 'PDO WBS' , datafield: 'OrgChartPositionTitle', width: 120,  cellsalign: 'left', hidden: false,
+          align: 'center', editable: false
+          , cellclassname: null
+          , exportable: true
+        },
+
         {
           text: 'Employee Name' , datafield: 'Name', width: 210,  cellsalign: 'left', align: 'center'
           , editable: false
@@ -506,24 +509,24 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
           , exportable: true
         },
         {
-          text: 'PAAF Job Title' , datafield: 'PAAFJobTitle', width: 120,  cellsalign: 'left', align: 'center', hidden: true,
+          text: 'PAAF Job Title' , datafield: 'PAAFJobTitle', width: 120,  cellsalign: 'left', align: 'center', hidden: false,
           editable: false
           , cellclassname: null
           , exportable: true
         },
-        {
-          text: 'Org Chart ID No.' , datafield: 'OrgChartIDNo', width: 120,  cellsalign: 'left', align: 'center', hidden: false,
-          editable: false
-          , cellclassname: null
-          , exportable: true
-        },
+        // {
+        //   text: 'Org Chart ID No.' , datafield: 'OrgChartIDNo', width: 120,  cellsalign: 'left', align: 'center', hidden: false,
+        //   editable: false
+        //   , cellclassname: null
+        //   , exportable: true
+        // },
 
-        {
-          text: 'Work Location' , datafield: 'ServicesLocation', width: 90,  cellsalign: 'left', align: 'center', hidden: false,
-          editable: false
-          , cellclassname: null
-          , exportable: true
-        },
+        // {
+        //   text: 'Work Location' , datafield: 'ServicesLocation', width: 90,  cellsalign: 'left', align: 'center', hidden: false,
+        //   editable: false
+        //   , cellclassname: null
+        //   , exportable: true
+        // },
         {
           text: 'Attachment' , datafield: 'atchUrl', width: 70,  cellsalign: 'left', align: 'center', hidden: false, editable: false,
           cellsrenderer: this.grdFnLnkRender
@@ -597,22 +600,22 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
       , hidden: false, exportable: false
     }
     rsCol.push(colAppr);
-    colAppr =
-    {
-        text: 'Approver Name'
-      , datafield: 'snc_mgr_name', columngroup: 'snc_mgr', width: 90,  cellsalign: 'center', align: 'center'
-      , cellsrenderer: null, cellclassname: null, editable: false
-      , hidden: false, exportable: false
-    }
-    rsCol.push(colAppr);
-    colAppr =
-    {
-        text: 'Status'
-      , datafield: 'snc_mgr_sts', columngroup: 'snc_mgr', width: 90,  cellsalign: 'center', align: 'center'
-      , cellsrenderer: null, cellclassname: this.cellclass, editable: false
-      , hidden: false, exportable: false
-    }
-    rsCol.push(colAppr);
+    // colAppr =
+    // {
+    //     text: 'Approver Name'
+    //   , datafield: 'snc_mgr_name', columngroup: 'snc_mgr', width: 90,  cellsalign: 'center', align: 'center'
+    //   , cellsrenderer: null, cellclassname: null, editable: false
+    //   , hidden: false, exportable: false
+    // }
+    // rsCol.push(colAppr);
+    // colAppr =
+    // {
+    //     text: 'Status'
+    //   , datafield: 'snc_mgr_sts', columngroup: 'snc_mgr', width: 90,  cellsalign: 'center', align: 'center'
+    //   , cellsrenderer: null, cellclassname: this.cellclass, editable: false
+    //   , hidden: false, exportable: false
+    // }
+    // rsCol.push(colAppr);
     colAppr =
     {
         text: 'Approver Name'
@@ -629,26 +632,26 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
       , hidden: false, exportable: false
     }
     rsCol.push(colAppr);
-    colAppr =
-    {
-        text: 'Approver Name'
-      , datafield: 'clnt_mgr_name', columngroup: 'clnt_mgr', width: 90,  cellsalign: 'center', align: 'center'
-      , cellsrenderer: null, cellclassname: this.cellclass, editable: false
-      , hidden: false, exportable: false
-    }
-    rsCol.push(colAppr);
-    colAppr =
-    {
-        text: 'Status'
-      , datafield: 'clnt_mgr_sts', columngroup: 'clnt_mgr', width: 90,  cellsalign: 'center', align: 'center'
-      , cellsrenderer: null, cellclassname: this.cellclass, editable: false
-      , hidden: false, exportable: false
-    }
-    rsCol.push(colAppr);
-    rsGrpCol.push({ text: 'SNC Lead', align: 'center', name: 'snc_lead' })
-    rsGrpCol.push({ text: 'SNC Director', align: 'center', name: 'snc_mgr' })
-    rsGrpCol.push({ text: 'ROO Lead', align: 'center', name: 'clnt_lead' })
-    rsGrpCol.push({ text: 'ROO Contract Admin', align: 'center', name: 'clnt_mgr'})
+    // colAppr =
+    // {
+    //     text: 'Approver Name'
+    //   , datafield: 'clnt_mgr_name', columngroup: 'clnt_mgr', width: 90,  cellsalign: 'center', align: 'center'
+    //   , cellsrenderer: null, cellclassname: this.cellclass, editable: false
+    //   , hidden: false, exportable: false
+    // }
+    // rsCol.push(colAppr);
+    // colAppr =
+    // {
+    //     text: 'Status'
+    //   , datafield: 'clnt_mgr_sts', columngroup: 'clnt_mgr', width: 90,  cellsalign: 'center', align: 'center'
+    //   , cellsrenderer: null, cellclassname: this.cellclass, editable: false
+    //   , hidden: false, exportable: false
+    // }
+    // rsCol.push(colAppr);
+    rsGrpCol.push({ text: 'Contractor Lead', align: 'center', name: 'snc_lead' })
+    // rsGrpCol.push({ text: 'SNC Director', align: 'center', name: 'snc_mgr' })
+    rsGrpCol.push({ text: 'Company Lead', align: 'center', name: 'clnt_lead' })
+    //rsGrpCol.push({ text: 'ROO Contract Admin', align: 'center', name: 'clnt_mgr'})
     const resData = {
       col : rsCol,
       colGrp : rsGrpCol,

@@ -10,7 +10,7 @@ export class GlbVarService {
   public rolSNCMGR: string = 'COD_ROL_SN_DIRECTOR';
   public rolSNTSUsr: string = 'COD_ROL_SN_PRJ_USR';
 
-  public rolGCDisLD: string = 'COD_ROL_GC_DISC_LEAD';
+  public rolGCDisLD: string = 'COD_ROL_CLNT_DISC_LEAD';
   public rolGCMGR: string = 'COD_ROL_GC_CONTRACT_ADM';
   public rolGCDrct: string ='COD_ROL_GC_DIRECTOR';
 

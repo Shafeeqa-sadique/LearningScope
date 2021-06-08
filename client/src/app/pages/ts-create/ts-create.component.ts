@@ -56,7 +56,7 @@ export class TsCreateComponent implements OnInit {
   atchLink;
   atchFlName;
   _callOffNO;
-  _TSPrj;
+
   _TSCurrStsID;
   _TSNxtStsDraftID;
   _TSNxtStsSubmitID;
@@ -152,33 +152,32 @@ export class TsCreateComponent implements OnInit {
   }
   _emailPAFInfo = [];
   _TSSumry = {};
+  _PAFId =0;
   getPAFDtl(usrId) {
     this.srSPXLst.getPAFReg(usrId).subscribe(rs => {
       const dt = rs.d.results;
       if (dt.length > 0) {
         this._callOffNO = dt[dt.length - 1].CallOffNumber;
-        this._TSPrj = dt[dt.length - 1].TSProject;
+        this._PAFId = dt[dt.length - 1].ID;
         const rw = {
           'PAAF No' : dt[dt.length - 1].PAAFNo + '-' + dt[dt.length - 1].Rev,
           'Name' : dt[dt.length - 1].Name,
           'Job Title': dt[dt.length - 1].PAAFJobTitle,
-          'Call Off No': this._callOffNO,
-          'Timesheet Project': this._TSPrj,
+          'Discipline': dt[dt.length - 1].Discipline
         };
         this._emailPAFInfo.push(rw);
-        console.log(this._emailPAFInfo);
         this._TSSumry = {
           Title : dt[dt.length - 1].ContractPositionTitle,
           LkUsrNameId: this.srLoginInfo.loginId,
           ServicesLocation: dt[dt.length - 1].ServicesLocation,
           PAAFNo : dt[dt.length - 1].PAAFNo + '-' + dt[dt.length - 1].Rev,
           CallOffNO : this._callOffNO,
-          TSPrj : this._TSPrj,
           EmpID : dt[dt.length - 1].EmployeeID,
           Name : dt[dt.length - 1].Name,
           PAFJobTitle : dt[dt.length - 1].PAAFJobTitle,
           OrgChartPositionTitle : dt[dt.length - 1].OrgChartPositionTitle,
           OrgChartIDNo : dt[dt.length - 1].OrgChartIDNo,
+          LkPAFId : this._PAFId
         };
 
       }
@@ -406,7 +405,7 @@ export class TsCreateComponent implements OnInit {
         pinned: 'left',
       },
       {
-        headerName: 'AFE', field: 'LkCBSCodeId', custattr: 'TXT', hide : false,
+        headerName: 'CTR Project Code', field: 'LkCBSCodeId', custattr: 'TXT', hide : false,
         cellRenderer: (e) => {
           return this.ddlSrcAFE.find(refData => refData.DISP_VALUE == e.data.LkCBSCodeId)?.DISP_NAME;
         },
@@ -638,6 +637,9 @@ export class TsCreateComponent implements OnInit {
       this._TSSumry['LastRmks']=this.frmGrp2.get('TsSubmitRmks').value;
       this._TSSumry['LkActUsrNameId']=this.srLoginInfo.loginId;
       this._TSSumry['LkActRolNameId']=this._PgRolID;
+      this._TSSumry['LkPAFId']=this._PAFId;
+      this._TSSumry['CallOffNO']='Call';
+      this._TSSumry['TSPrj']='TS';
 
       this.grdApi.forEachNode(node => {
         const dt = node.data;
@@ -680,11 +682,15 @@ export class TsCreateComponent implements OnInit {
             this._TSSumry['WDay9'] = this._TSSumry['WDay9'] + this.fnGetOT(dt['WDay9']); }
         }
       });
-      this.srSPXLst.getWkTSDaysSmry(this._TSSumry['LkWkNameId'], this._TSSumry['CallOffNO'], this._TSSumry['TSPrj'], this.srLoginInfo.loginId)
+      this.srSPXLst.getWkTSDaysSmry(this._TSSumry['LkWkNameId'], null, null, this.srLoginInfo.loginId)
       .subscribe(rs => {
        const dt = rs.d.results;
       //  const dt = this._dtCrrTSSmry
+      console.log('GET sUMMARY')
+      console.log(dt)
         if (dt.length > 0) {
+          console.log('this._TSSumry')
+          console.log(this._TSSumry)
           this.srSPXLst.UptWkTSDays(this.srLoginInfo.authCode, this._TSSumry, dt[0].ID).subscribe( rs => {
             console.log('Summary Update');
             // console.log(rs)
@@ -747,7 +753,7 @@ export class TsCreateComponent implements OnInit {
               if (isValid) {
                 if ((node.data.LkCBSCodeId === undefined) || (node.data.LkCBSCodeId === null)) {
                   isValid = false;
-                  msg = 'AFE is mandatory, please choose the AFE for Task ' + (Number(rowCnt)).toString();
+                  msg = 'CTR Project Code is mandatory, please choose the CTR for Task ' + (Number(rowCnt)).toString();
                   rwIdx = node.rowIndex;
                 }
                 if (isValid) {
@@ -773,26 +779,6 @@ export class TsCreateComponent implements OnInit {
             }
             if (isValid) {
               this.isSubmitProg = true;
-              // if (this.flName) {
-              //   const data = {
-              //     Title : this.flName,
-              //     FL_NME: this.flName,
-              //     LkWkNameId: fltr[0].Id,
-              //     LkUsrNameId: this.srLoginInfo.loginId,
-              //   };
-              //   this.srSPXLst.AddFileMetadata(this.srLoginInfo.authCode, data).subscribe(rs1 => {
-              //     const dtF = rs1.d;
-              //     const fl = this.frmGrp2.get('file').value;
-              //     this.srSPXLst.AddFile(this.srLoginInfo.authCode, fl, this.flName, dtF.ID, true).subscribe(rs => {
-              //       const dt = rs.d;
-              //       this.getAttach();
-              //     }, err => {
-              //       this.srMsg.show(err, 'ERROR',
-              //       {status: 'danger', destroyByClick: true, duration: 8000, hasIcon: true},
-              //       );
-              //     });
-              //   });
-              // }
               // SUMMARIZE TIMESHEET
               this.fnTSCnvrtDays(pNxtStsID);
               // SUBCRIBE WAIT FOR ALL REQUEST
@@ -803,7 +789,7 @@ export class TsCreateComponent implements OnInit {
                 dt['LkWkNameId'] = fltr[0].Id;
                 dt['LkUsrNameId'] = this.srLoginInfo.loginId;
                 dt['CallOffNo'] = this._callOffNO;
-                dt['TSPrj'] = this._TSPrj;
+                dt['LkPAFId'] = this._PAFId
 
                 delete dt.LkCBSCode;
                 delete dt.Id;
@@ -825,48 +811,6 @@ export class TsCreateComponent implements OnInit {
                   this.fnSendEmail(fltr[0].WkName, pNxtStsID);
               });
 
-              /**##**/
-              /*
-              let uptRowCnt = 1;
-              this.grdApi.forEachNode(node => {
-                const dt = node.data;
-                const dtID = dt.ID;
-                dt['LkWkNameId'] = fltr[0].Id;
-                dt['LkUsrNameId'] = this.srLoginInfo.loginId;
-                dt['CallOffNo'] = this._callOffNO;
-                dt['TSPrj'] = this._TSPrj;
-
-                delete dt.LkCBSCode;
-                delete dt.Id;
-                delete dt.ID;
-                delete dt.LkUsrName;
-                delete dt.LkWkName;
-                if (dtID == 0) {
-
-                  this.srSPXLst.AddTS(this.srLoginInfo.authCode, dt).subscribe(rs => {
-                      if (uptRowCnt >= rowCnt) {
-                        this.uptChangeSts(fltr[0].WkName, pNxtStsID);
-                      }
-                    }, err => {
-                      this.srMsg.show('Error adding PAAF, Please contact support' + err, 'Error',
-                        {status: 'danger', destroyByClick: true, duration: 8000, hasIcon: false},
-                        );
-                    });
-                } else {
-                  this.srSPXLst.UptTS(this.srLoginInfo.authCode, dt, dtID).subscribe(rs => {
-                      if (uptRowCnt >= rowCnt) {
-                        this.uptChangeSts(fltr[0].WkName, pNxtStsID);
-                      }
-                    }, err => {
-                      this.srMsg.show('Error adding PAAF, Please contact support' + err, 'Error',
-                        {status: 'danger', destroyByClick: true, duration: 8000, hasIcon: false},
-                        );
-                    });
-                }
-                uptRowCnt = uptRowCnt + 1;
-              });
-              */
-              /**## */
             } else {
 
               this.srDialog.open(ConfirmdialogComponent,
@@ -924,7 +868,6 @@ export class TsCreateComponent implements OnInit {
     const dtNow = this.srGlbVar.dateAheadFix(new Date());
     const rw = {
       CallOffNo: this._callOffNO,
-      TSPrj: this._TSPrj,
       SubmitDt: dtNow,
       Comments: this.frmGrp2.get('TsSubmitRmks').value,
       LkStatusCodeId: pNxtStsID,

@@ -1,7 +1,16 @@
-{
+[
+  {
   "siteUrl": "https://spl.snclavalin.com/sites/omprjbpgcmc",
   "strategy": "OnpremiseUserCredentials",
   "username": "TANOS2",
   "password": "83efdfd9b06a7ed23f8b942561df6e5c15f77cbf15fbf5469aa6bcc06c177f692eb9ee44645da40937155e066bc28165gNj/oewZxtgVAakBpvfUaw==",
   "domain": "sli.bz"
+},
+{
+  "siteUrl": "https://atkins.sharepoint.com/sites/edpmomprjPDOCSSCContract",
+  "strategy": "UserCredentials",
+  "password": "8621758abd98cbd4074771981ff1c4992c17646b1cad1f357823f6bdcbe0a4ccfab5eeea3573e4959efe4021aacdb9fajAV/TNTybZb4RlXMtHT0AA==",
+  "username": "prabhu.kumaravelu@snclavalin.com",
+  "online": true
 }
+]
