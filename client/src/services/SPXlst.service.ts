@@ -1211,7 +1211,7 @@ export class SPXlstService extends SPXapi {
       else
         qry = vTSPrj;
     }
-    const url = '/_api/web/lists/GetByTitle(\'' + this.lsTSDtlHrs + '\')/items?$top=5000&$filter=' + qry + '&$select=ID,Title,AFEType,LkUsrName/Id,LkUsrName/UsrName,LkCBSCode/TASK_CODE,LkCBSCode/TASK_DESC,LkWkName/Id,LkUsrNameId,LkCBSCodeId,LkWkNameId,WDay0,WDay1,WDay2,WDay3,WDay4,WDay5,WDay6,WDay7,WDay8,WDay9&$expand=LkUsrName,LkCBSCode,LkWkName';
+    const url = '/_api/web/lists/GetByTitle(\'' + this.lsTSDtlHrs + '\')/items?$top=5000&$filter=' + qry + '&$select=ID,Title,AFEType,LkUsrName/Id,LkUsrName/UsrName,LkCBSCode/TASK_CODE,LkCBSCode/TASK_DESC,LkWkName/Id,LkUsrNameId,LkCBSCodeId,LkWkNameId,WDay0,WDay1,WDay2,WDay3,WDay4,WDay5,WDay6,WDay7,WDay8,WDay9,LkWBS/Title,LkWBS/ClusterCode&$expand=LkUsrName,LkCBSCode,LkWkName,LkWBS';
     return this.getSPX(url);
   }
 

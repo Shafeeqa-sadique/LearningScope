@@ -389,8 +389,8 @@ export class TsUcTsviewComponent implements OnInit, OnChanges {
     const json1 = this.srGlbVar.csv2json(csv);
     const obj = JSON.parse(json1);
     obj.forEach(el => {
-      const fltAct = this.ddlSrcAFE.filter(a => a.DISP_VALUE == el.AFE);
-      el.AFE = fltAct[0].DISP_NAME;
+      const fltAct = this.ddlSrcAFE.filter(a => a.DISP_VALUE == el['CTR Project Code']);
+      el['CTR Project Code'] = fltAct[0].DISP_NAME;
     });
     return obj;
   }

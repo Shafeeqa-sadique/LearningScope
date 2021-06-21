@@ -194,6 +194,8 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
               ServicesLocation: null,
               PAAFNo: null,
               CBSCode: elcld.LkCBSCode.TASK_CODE,
+              PDOWBS: elcld.LkWBS.Title,
+              ClusterCode: elcld.LkWBS.ClusterCode
             };
             for (const key in elcld) {
                 if (elcld.hasOwnProperty(key)) {
@@ -218,7 +220,9 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
           atchFileName: flName,
           LkUsrNameId: el.LkUsrNameId,
           CallOffNO: el.CallOffNO,
-          TSPrj: el.TSPrj
+          TSPrj: el.TSPrj,
+          PDOWBS: null,
+          ClusterCode: null
         };
         let fltSts = dtWKSts.filter(eSts => eSts.LkTsUsrNameId == grRw.LkUsrNameId && eSts['LkActionByRoleName'].RoleName == this.srGlbVar.rolSNCDisLD)
         if(fltSts.length >0){
@@ -443,7 +447,9 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
         { name: 'clnt_ld_css', type: 'string'},
         { name: 'clnt_mgr_name', type: 'string'},
         { name: 'clnt_mgr_sts', type: 'string'},
-        { name: 'clnt_mgr_css', type: 'string'}
+        { name: 'clnt_mgr_css', type: 'string'},
+        { name: 'PDOWBS', type: 'string'},
+        { name: 'ClusterCode', type:'string'}
     ];
     const rsCol = [
         { text: '##', datafield: 'ID', width: 30, cellsalign: 'center', align: 'center' , hidden: true, exportable: false
@@ -490,19 +496,6 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
           , exportable: true
         },
         {
-          text: 'CTR Project Code' , datafield: 'TSPrj', width: 120,  cellsalign: 'left', hidden: false,
-          align: 'center', editable: false
-          , cellclassname: null
-          , exportable: true
-        },
-        {
-          text: 'PDO WBS' , datafield: 'OrgChartPositionTitle', width: 120,  cellsalign: 'left', hidden: false,
-          align: 'center', editable: false
-          , cellclassname: null
-          , exportable: true
-        },
-
-        {
           text: 'Employee Name' , datafield: 'Name', width: 210,  cellsalign: 'left', align: 'center'
           , editable: false
           , cellclassname: null
@@ -528,6 +521,30 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
         //   , exportable: true
         // },
         {
+          text: 'PDO WBS' , datafield: 'PDOWBS', width: 120,  cellsalign: 'left', hidden: false,
+          align: 'center', editable: false
+          , cellclassname: null
+          , exportable: true
+        },
+        {
+          text: 'Cluster Code' , datafield: 'ClusterCode', width: 80,  cellsalign: 'left', hidden: false,
+          align: 'center', editable: false
+          , cellclassname: null
+          , exportable: true
+        },
+        {
+          text: 'CBS Code' , datafield: 'CBSCode', width: 90,  cellsalign: 'left', hidden: false,
+          align: 'center', editable: false
+          , cellclassname: null
+          , exportable: true
+        },
+        {
+          text: 'Category' , datafield: 'AFEType', width: 80,  cellsalign: 'left', hidden: false,
+          align: 'center', editable: false
+          , cellclassname: null
+          , exportable: true
+        },
+        {
           text: 'Attachment' , datafield: 'atchUrl', width: 70,  cellsalign: 'left', align: 'center', hidden: false, editable: false,
           cellsrenderer: this.grdFnLnkRender
           , cellclassname: null, exportable: false,
@@ -539,18 +556,19 @@ export class TsUcDiscviewComponent implements OnInit, OnChanges  {
           , exportable: true
         },
     ];
-    if(this._isSNCLD === true){
-      let rw1 =  {
-        text: 'CBS Code' , datafield: 'CBSCode', width: 90,  cellsalign: 'left', align: 'center'
-        , cellclassname: null, hidden: false, exportable: false, editable: false
-      }
-      rsCol.push(rw1);
-      rw1 =  {
-        text: 'Category' , datafield: 'AFEType', width: 80,  cellsalign: 'left', align: 'center'
-        , cellclassname: null, hidden: false, exportable: false, editable: false
-      }
-      rsCol.push(rw1);
-    }
+    // if(this._isSNCLD === true){
+    //   let rw1 =  {
+    //     text: 'CBS Code' , datafield: 'CBSCode', width: 90,  cellsalign: 'left', align: 'center'
+    //     , cellclassname: null, hidden: false, exportable: false, editable: false
+    //   }
+    //   rsCol.push(rw1);
+    //   rw1 =  {
+    //     text: 'Category' , datafield: 'AFEType', width: 80,  cellsalign: 'left', align: 'center'
+    //     , cellclassname: null, hidden: false, exportable: false, editable: false
+    //   }
+    //   rsCol.push(rw1);
+    // }
+
     const rsGrpCol = [];
     const vDtEnd = new Date(dtEnd);
     const vDtSrt = new Date(dtStrt);
