@@ -1895,4 +1895,7 @@ export class TsCostCtrlComponent implements OnInit {
     };
     return (S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4());
   };
+  SendReminderMail=() => {
+    console.log('reminder mail');
+  }
 }
